@@ -5,6 +5,12 @@
 /.vagrant/
 .DS_Store
 Thumbs.db
+/docs
+START_HERE.md
+FOLDER_STRUCTURE.md
+CONTRIBUTING.md
+ARCHITECTURE.md
+
 
 # Laravel
 /bootstrap/cache/*
