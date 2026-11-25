@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERD - UMKM Sales System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #0f0f1e;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border: 1px solid rgba(100,200,255,0.2);
+        }
+        h1 {
+            color: #4fc3f7;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 28px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .entity {
+            fill: #1a1a2e;
+            stroke: #4fc3f7;
+            stroke-width: 2;
+        }
+        .entity-title {
+            fill: #4fc3f7;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .entity-attr {
+            fill: #e0e0e0;
+            font-size: 12px;
+        }
+        .entity-pk {
+            fill: #ffd700;
+            font-weight: bold;
+        }
+        .entity-fk {
+            fill: #ff6b6b;
+        }
+        .relationship {
+            stroke: #4fc3f7;
+            stroke-width: 2;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+        .relationship-label {
+            fill: #4fc3f7;
+            font-size: 11px;
+            background: #0f0f1e;
+        }
+        .legend {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(100,200,255,0.2);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            color: #aaa;
+            font-size: 13px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .pk { background: #ffd700; }
+        .fk { background: #ff6b6b; }
+        .attr { background: #e0e0e0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗄️ Entity Relationship Diagram (ERD)</h1>
+        <p class="subtitle">Aplikasi Web Pencatatan Penjualan UMKM</p>
+        
+        <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#4fc3f7" />
+                </marker>
+            </defs>
+
+            <!-- USERS Entity -->
+            <rect class="entity" x="50" y="50" width="160" height="140" rx="4"/>
+            <text class="entity-title" x="65" y="70">👤 Users</text>
+            <line x1="50" y1="80" x2="210" y2="80" stroke="#4fc3f7" stroke-width="1"/>
+            <text class="entity-attr entity-pk" x="65" y="100">• id (PK)</text>
+            <text class="entity-attr" x="65" y="118">• name</text>
+            <text class="entity-attr" x="65" y="136">• email (UNIQUE)</text>
+            <text class="entity-attr" x="65" y="154">• password</text>
+            <text class="entity-attr" x="65" y="172">• is_admin</text>
+
+            <!-- BUSINESS_PROFILES Entity -->
+            <rect class="entity" x="350" y="50" width="180" height="140" rx="4"/>
+            <text class="entity-title" x="365" y="70">🏢 Business Profiles</text>
+            <line x1="350" y1="80" x2="530" y2="80" stroke="#4fc3f7" stroke-width="1"/>
+            <text class="entity-attr entity-pk" x="365" y="100">• id (PK)</text>
+            <text class="entity-attr entity-fk" x="365" y="118">• user_id (FK)</text>
+            <text class="entity-attr" x="365" y="136">• business_name</text>
+            <text class="entity-attr" x="365" y="154">• owner_name</text>
+            <text class="entity-attr" x="365" y="172">• address, phone</text>
+
+            <!-- CATEGORIES Entity -->
+            <rect class="entity" x="700" y="50" width="160" height="120" rx="4"/>
+            <text class="entity-title" x="715" y="70">🏷️ Categories</text>
+            <line x1="700" y1="80" x2="860" y2="80" stroke="#4fc3f7" stroke-width="1"/>
+            <text class="entity-attr entity-pk" x="715" y="100">• id (PK)</text>
+            <text class="entity-attr entity-fk" x="715" y="118">• user_id (FK)</text>
+            <text class="entity-attr" x="715" y="136">• name</text>
+            <text class="entity-attr" x="715" y="154">• description</text>
+
+            <!-- PRODUCTS Entity -->
+            <rect class="entity" x="1000" y="50" width="180" height="160" rx="4"/>
+            <text class="entity-title" x="1015" y="70">📦 Products</text>
+            <line x1="1000" y1="80" x2="1180" y2="80" stroke="#4fc3f7" stroke-width="1"/>
+            <text class="entity-attr entity-pk" x="1015" y="100">• id (PK)</text>
+            <text class="entity-attr entity-fk" x="1015" y="118">• user_id (FK)</text>
+            <text class="entity-attr entity-fk" x="1015" y="136">• category_id (FK)</text>
+            <text class="entity-attr" x="1015" y="154">• name, price</text>
+            <text class="entity-attr" x="1015" y="172">• stock, unit</text>
+            <text class="entity-attr" x="1015" y="190">• is_active</text>
+
+            <!-- TRANSACTIONS Entity -->
+            <rect class="entity" x="200" y="350" width="200" height="140" rx="4"/>
+            <text class="entity-title" x="215" y="370">💳 Transactions</text>
+            <line x1="200" y1="380" x2="400" y2="380" stroke="#4fc3f7" stroke-width="1"/>
+            <text class="entity-attr entity-pk" x="215" y="400">• id (PK)</text>
+            <text class="entity-attr entity-fk" x="215" y="418">• user_id (FK)</text>
+            <text class="entity-attr" x="215" y="436">• transaction_code (UNIQUE)</text>
+            <text class="entity-attr" x="215" y="454">• transaction_date</text>
+            <text class="entity-attr" x="215" y="472">• total_amount</text>
+
+            <!-- TRANSACTION_ITEMS Entity -->
+            <rect class="entity" x="600" y="350" width="200" height="140" rx="4"/>
+            <text class="entity-title" x="615" y="370">📋 Transaction Items</text>
+            <line x1="600" y1="380" x2="800" y2="380" stroke="#4fc3f7" stroke-width="1"/>
+            <text class="entity-attr entity-pk" x="615" y="400">• id (PK)</text>
+            <text class="entity-attr entity-fk" x="615" y="418">• transaction_id (FK)</text>
+            <text class="entity-attr entity-fk" x="615" y="436">• product_id (FK)</text>
+            <text class="entity-attr" x="615" y="454">• product_name</text>
+            <text class="entity-attr" x="615" y="472">• price, quantity, subtotal</text>
+
+            <!-- BLOG_POSTS Entity -->
+            <rect class="entity" x="900" y="350" width="160" height="120" rx="4"/>
+            <text class="entity-title" x="915" y="370">📝 Blog Posts</text>
+            <line x1="900" y1="380" x2="1060" y2="380" stroke="#4fc3f7" stroke-width="1"/>
+            <text class="entity-attr entity-pk" x="915" y="400">• id (PK)</text>
+            <text class="entity-attr" x="915" y="418">• title, slug</text>
+            <text class="entity-attr" x="915" y="436">• content</text>
+            <text class="entity-attr" x="915" y="454">• published_at</text>
+
+            <!-- Relationships -->
+            <!-- Users -> Business Profiles (1:1) -->
+            <path class="relationship" d="M 210 120 L 350 120"/>
+            <text class="relationship-label" x="270" y="110">1:1</text>
+
+            <!-- Users -> Categories (1:N) -->
+            <path class="relationship" d="M 210 90 Q 450 40 700 100"/>
+            <text class="relationship-label" x="430" y="50">1:N</text>
+
+            <!-- Users -> Products (1:N) -->
+            <path class="relationship" d="M 210 80 Q 600 20 1000 80"/>
+            <text class="relationship-label" x="580" y="35">1:N</text>
+
+            <!-- Categories -> Products (1:N) -->
+            <path class="relationship" d="M 860 130 L 1000 110"/>
+            <text class="relationship-label" x="915" y="105">1:N</text>
+
+            <!-- Users -> Transactions (1:N) -->
+            <path class="relationship" d="M 130 190 L 280 350"/>
+            <text class="relationship-label" x="140" y="270">1:N</text>
+
+            <!-- Transactions -> Transaction Items (1:N) -->
+            <path class="relationship" d="M 400 420 L 600 420"/>
+            <text class="relationship-label" x="490" y="410">1:N</text>
+
+            <!-- Products -> Transaction Items (1:N) -->
+            <path class="relationship" d="M 1000 200 Q 850 270 800 350"/>
+            <text class="relationship-label" x="900" y="270">1:N</text>
+        </svg>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color pk"></div>
+                <span>PK = Primary Key (Kunci Utama)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color fk"></div>
+                <span>FK = Foreign Key (Kunci Asing)</span>
+            </div>
+            <div class="legend-item">
+                <span>1:1 = Satu ke Satu</span>
+            </div>
+            <div class="legend-item">
+                <span>1:N = Satu ke Banyak</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

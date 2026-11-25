@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur Folder - UMKM Sales</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            font-family: 'Courier New', monospace;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #0f0f1e;
+            border-radius: 12px;
+            padding: 40px;
+            border: 2px solid #4fc3f7;
+        }
+        h1 {
+            color: #4fc3f7;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .subtitle {
+            color: #aaa;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+        .tree {
+            background: #1a1a2e;
+            border: 1px solid #4fc3f7;
+            border-radius: 6px;
+            padding: 20px;
+            overflow-x: auto;
+            line-height: 1.8;
+            color: #e0e0e0;
+            font-size: 12px;
+        }
+        .folder { color: #4fc3f7; font-weight: bold; }
+        .pkl { color: #51cf66; font-weight: bold; }
+        .file { color: #aaa; }
+        .comment { color: #666; font-style: italic; margin-left: 20px; }
+        .section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(79, 195, 247, 0.2);
+        }
+        .section-title {
+            color: #4fc3f7;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .link-card {
+            background: #1a1a2e;
+            border: 1px solid #4fc3f7;
+            border-radius: 6px;
+            padding: 15px;
+            color: #e0e0e0;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .link-title {
+            color: #4fc3f7;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .highlight {
+            background: rgba(81, 207, 102, 0.1);
+            border-left: 3px solid #51cf66;
+            padding: 15px;
+            margin: 20px 0;
+            color: #e0e0e0;
+            font-size: 12px;
+            line-height: 1.6;
+            border-radius: 4px;
+        }
+        .command {
+            background: #0f0f1e;
+            border: 1px solid #666;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            color: #4fc3f7;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📁 Struktur Folder UMKM Sales System</h1>
+        <p class="subtitle">Organisasi project untuk presentasi PKL & development</p>
+
+        <div class="highlight">
+            ✅ Folder sudah dirapi untuk kemudahan navigasi<br>
+            🎯 Presentasi: buka <strong>docs/PKL/INDEX.html</strong><br>
+            🚀 Development: gunakan folder <strong>app/, database/, routes/</strong>
+        </div>
+
+        <!-- Current Structure -->
+        <div class="tree">
+            <div><span class="folder">umkm-sales/</span></div>
+            <br>
+            <div><span class="folder">📚 docs/</span> <span class="comment">← Dokumentasi lengkap</span></div>
+            <div>&nbsp;&nbsp;├── <span class="pkl">📌 PKL/</span> <span class="comment">← 🎯 PRESENTASI PKL (MULAI DARI SINI)</span></div>
+            <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span class="file">INDEX.html</span> <span class="comment">halaman utama navigasi</span></div>
+            <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span class="file">PROJECT_OVERVIEW.html</span> <span class="comment">ringkasan proyek</span></div>
+            <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span class="file">ERD.html</span> <span class="comment">diagram database</span></div>
+            <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span class="file">USER_FLOW.html</span> <span class="comment">alur pengguna</span></div>
+            <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span class="file">DATABASE_FLOW.html</span> <span class="comment">detail data flow</span></div>
+            <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span class="file">TECHNICAL_DOCS.md</span> <span class="comment">referensi teknis</span></div>
+            <div>&nbsp;&nbsp;│&nbsp;&nbsp;└── <span class="file">README.md</span> <span class="comment">panduan presentasi</span></div>
+            <br>
+            <div>&nbsp;&nbsp;└── <span class="folder">📖 guides/</span> <span class="comment">← Setup & Referensi</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">README.md</span> <span class="comment">project intro</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">QUICK_START.md</span> <span class="comment">setup cepat</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">SETUP_GUIDE.md</span> <span class="comment">setup lengkap</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">PHP_COMPATIBILITY.md</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">CHANGELOG.md</span> <span class="comment">daftar perubahan</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">FIX_SUMMARY.md</span></div>
+            <br>
+            <div><span class="folder">🔧 scripts/</span> <span class="comment">← Automation</span></div>
+            <div>&nbsp;&nbsp;├── <span class="file">setup-database.sh</span></div>
+            <div>&nbsp;&nbsp;└── <span class="file">setup-db.sh</span></div>
+            <br>
+            <div><span class="folder">💻 app/</span> <span class="comment">← Source Code Laravel</span></div>
+            <div>&nbsp;&nbsp;├── <span class="folder">Http/</span></div>
+            <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── Controllers/ <span class="comment">request handlers</span></div>
+            <div>&nbsp;&nbsp;│&nbsp;&nbsp;└── Middleware/</div>
+            <div>&nbsp;&nbsp;├── <span class="folder">Models/</span> <span class="comment">database models</span></div>
+            <div>&nbsp;&nbsp;└── <span class="folder">Policies/</span></div>
+            <br>
+            <div><span class="folder">🗄️ database/</span></div>
+            <div>&nbsp;&nbsp;├── <span class="folder">migrations/</span> <span class="comment">schema changes</span></div>
+            <div>&nbsp;&nbsp;└── <span class="folder">seeders/</span> <span class="comment">dummy data</span></div>
+            <br>
+            <div><span class="folder">🌐 routes/</span></div>
+            <div>&nbsp;&nbsp;├── <span class="file">web.php</span> <span class="comment">web routes</span></div>
+            <div>&nbsp;&nbsp;└── <span class="file">console.php</span></div>
+            <br>
+            <div><span class="folder">🎨 resources/</span></div>
+            <div>&nbsp;&nbsp;├── <span class="folder">views/</span> <span class="comment">blade templates</span></div>
+            <div>&nbsp;&nbsp;├── <span class="folder">css/</span></div>
+            <div>&nbsp;&nbsp;└── <span class="folder">js/</span></div>
+            <br>
+            <div><span class="folder">🌍 public/</span> <span class="comment">← Web root</span></div>
+            <div>&nbsp;&nbsp;├── <span class="file">index.php</span> <span class="comment">entry point</span></div>
+            <div>&nbsp;&nbsp;├── <span class="folder">css/</span></div>
+            <div>&nbsp;&nbsp;├── <span class="folder">js/</span></div>
+            <div>&nbsp;&nbsp;└── <span class="file">logo-sekolah.jpg</span></div>
+            <br>
+            <div><span class="folder">🧪 tests/</span></div>
+            <div>&nbsp;&nbsp;├── <span class="folder">Feature/</span></div>
+            <div>&nbsp;&nbsp;└── <span class="folder">Unit/</span></div>
+            <br>
+            <div><span class="folder">📦 vendor/</span> <span class="comment">← Auto-generated (PHP dependencies)</span></div>
+            <div><span class="folder">📦 node_modules/</span> <span class="comment">← Auto-generated (JS dependencies)</span></div>
+            <br>
+            <div><span class="file">⚙️ .env</span> <span class="comment">environment secrets (DO NOT COMMIT)</span></div>
+            <div><span class="file">⚙️ .env.example</span> <span class="comment">template untuk .env</span></div>
+            <div><span class="file">⚙️ composer.json</span> <span class="comment">PHP packages</span></div>
+            <div><span class="file">⚙️ package.json</span> <span class="comment">Node packages</span></div>
+            <div><span class="file">⚙️ artisan</span> <span class="comment">Laravel CLI</span></div>
+            <div><span class="file">📄 FOLDER_STRUCTURE.md</span> <span class="comment">ini → struktur folder</span></div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="section">
+            <div class="section-title">⚡ Quick Links</div>
+            <div class="quick-links">
+                <div class="link-card">
+                    <div class="link-title">🎯 Untuk Presentasi</div>
+                    Buka: <strong>docs/PKL/INDEX.html</strong><br>
+                    Navigasi semua dokumentasi dari sini
+                </div>
+                <div class="link-card">
+                    <div class="link-title">🚀 Setup Project</div>
+                    Baca: <strong>docs/guides/QUICK_START.md</strong><br>
+                    atau <strong>FOLDER_STRUCTURE.md</strong>
+                </div>
+                <div class="link-card">
+                    <div class="link-title">💻 Development</div>
+                    Folder utama:<br>
+                    <strong>app/</strong> (code)<br>
+                    <strong>routes/</strong> (URL)<br>
+                    <strong>database/</strong> (schema)
+                </div>
+                <div class="link-card">
+                    <div class="link-title">📚 Dokumentasi</div>
+                    Referensi teknis:<br>
+                    <strong>TECHNICAL_DOCS.md</strong><br>
+                    di docs/PKL/
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Commands -->
+        <div class="section">
+            <div class="section-title">🔧 Command Quick Reference</div>
+            
+            <strong style="color: #4fc3f7;">Buka presentasi:</strong>
+            <div class="command">open docs/PKL/INDEX.html</div>
+            
+            <strong style="color: #4fc3f7;">Setup database:</strong>
+            <div class="command">bash scripts/setup-database.sh</div>
+            
+            <strong style="color: #4fc3f7;">Install & run:</strong>
+            <div class="command">composer install && npm install && php artisan serve</div>
+        </div>
+
+        <!-- File Organization Benefits -->
+        <div class="section">
+            <div class="section-title">✅ Keuntungan Struktur Baru</div>
+            <div style="color: #e0e0e0; font-size: 12px; line-height: 1.8;">
+                ✓ Presentasi PKL terpisah di <strong>docs/PKL/</strong><br>
+                ✓ Setup guide terpisah di <strong>docs/guides/</strong><br>
+                ✓ Scripts automation di <strong>scripts/</strong><br>
+                ✓ Source code tetap rapi di <strong>app/, routes/, database/</strong><br>
+                ✓ Mudah dicari, mudah dipahami<br>
+                ✓ Professional structure untuk presentasi
+            </div>
+        </div>
+
+        <!-- Navigation Guide -->
+        <div class="section">
+            <div class="section-title">📍 Panduan Navigasi</div>
+            <table style="width: 100%; color: #e0e0e0; font-size: 12px; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid rgba(79, 195, 247, 0.2);">
+                    <td style="padding: 8px; color: #4fc3f7; font-weight: bold;">Tujuan</td>
+                    <td style="padding: 8px; color: #4fc3f7; font-weight: bold;">File/Folder</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(79, 195, 247, 0.1);">
+                    <td style="padding: 8px;">Mulai presentasi</td>
+                    <td style="padding: 8px;"><strong>docs/PKL/INDEX.html</strong></td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(79, 195, 247, 0.1);">
+                    <td style="padding: 8px;">Setup cepat</td>
+                    <td style="padding: 8px;">docs/guides/QUICK_START.md</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(79, 195, 247, 0.1);">
+                    <td style="padding: 8px;">Setup lengkap</td>
+                    <td style="padding: 8px;">docs/guides/SETUP_GUIDE.md</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(79, 195, 247, 0.1);">
+                    <td style="padding: 8px;">Modifikasi code</td>
+                    <td style="padding: 8px;">app/, routes/, database/</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(79, 195, 247, 0.1);">
+                    <td style="padding: 8px;">Lihat views/template</td>
+                    <td style="padding: 8px;">resources/views/</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;">Automation scripts</td>
+                    <td style="padding: 8px;">scripts/</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(100,200,255,0.2); text-align: center; color: #aaa; font-size: 11px;">
+            <p>✨ Struktur folder sudah dirapi untuk kemudahan</p>
+            <p style="margin-top: 5px;">Setiap file sudah di tempat yang tepat dan mudah ditemukan</p>
+        </div>
+    </div>
+</body>
+</html>

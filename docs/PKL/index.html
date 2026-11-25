@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dokumentasi PKL — UMKM Sales System</title>
+  <style>
+    :root {
+      --purple:   #6d28d9;
+      --purple-l: #7c3aed;
+      --purple-bg:#f5f3ff;
+      --purple-bd:#ede9fe;
+      --text:     #111827;
+      --text-s:   #6b7280;
+      --text-xs:  #9ca3af;
+      --bg:       #ffffff;
+      --bg-s:     #f9fafb;
+      --bg-m:     #f3f4f6;
+      --border:   #e5e7eb;
+      --green:    #059669;
+      --yellow:   #d97706;
+      --red:      #dc2626;
+      --blue:     #2563eb;
+      --code-bg:  #f8f7ff;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;line-height:1.6;color:var(--text);background:var(--bg);font-size:15px;}
+
+    /* NAV */
+    .topnav{position:fixed;top:0;left:0;right:0;height:56px;background:#fff;border-bottom:1px solid var(--border);z-index:200;display:flex;align-items:center;padding:0 24px;gap:16px;}
+    .topnav-logo{font-size:16px;font-weight:700;color:var(--purple);text-decoration:none;white-space:nowrap;}
+    .topnav-badge{background:var(--purple-bg);color:var(--purple);font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;border:1px solid var(--purple-bd);}
+    .topnav-right{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-s);}
+
+    /* LAYOUT */
+    .layout{display:flex;padding-top:56px;min-height:100vh;}
+
+    /* SIDEBAR */
+    .sidebar{width:240px;flex-shrink:0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;border-right:1px solid var(--border);padding:24px 0;}
+    .sidebar-group{margin-bottom:4px;}
+    .sidebar-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-xs);padding:8px 20px 4px;}
+    .sidebar a{display:block;padding:7px 20px;font-size:13.5px;color:var(--text-s);text-decoration:none;border-left:2px solid transparent;transition:all .15s;}
+    .sidebar a:hover{color:var(--purple);background:var(--purple-bg);border-left-color:var(--purple-bd);}
+    .sidebar a.active{color:var(--purple);font-weight:600;background:var(--purple-bg);border-left-color:var(--purple);}
+
+    /* MAIN */
+    .main{flex:1;min-width:0;padding:48px 48px 80px;}
+    .content-section{max-width:800px;}
+    section{margin-bottom:72px;scroll-margin-top:76px;}
+    section:last-child{margin-bottom:0;}
+
+    /* TYPOGRAPHY */
+    h1{font-size:40px;font-weight:700;letter-spacing:-1px;margin-bottom:12px;line-height:1.15;}
+    h2{font-size:24px;font-weight:700;margin-top:52px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+    h2:first-child{margin-top:0;}
+    h3{font-size:16px;font-weight:600;margin-top:28px;margin-bottom:12px;color:var(--text);}
+    p{margin-bottom:14px;color:#374151;}
+    ul,ol{padding-left:20px;margin-bottom:16px;}
+    li{margin-bottom:6px;color:#374151;}
+    a{color:var(--purple);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .lead{font-size:17px;color:var(--text-s);margin-bottom:32px;line-height:1.7;}
+
+    /* HERO */
+    .hero{margin-bottom:48px;}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+    .tag{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid var(--border);color:var(--text-s);background:var(--bg-s);}
+    .tag.purple{background:var(--purple-bg);border-color:var(--purple-bd);color:var(--purple);}
+
+    /* STATS */
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0;}
+    .stat-card{border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;background:var(--bg-s);}
+    .stat-card .num{font-size:28px;font-weight:700;color:var(--purple);}
+    .stat-card .lbl{font-size:12px;color:var(--text-s);margin-top:4px;}
+
+    /* CARDS */
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0;}
+    .card{border:1px solid var(--border);border-radius:10px;padding:20px;background:var(--bg-s);}
+    .card h4{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);}
+    .card ul{margin:0;padding-left:16px;font-size:13px;}
+    .card li{margin-bottom:4px;color:#4b5563;}
+    .card-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:20px 0;}
+    .card-nav a{border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;text-decoration:none;color:var(--text);background:var(--bg);transition:all .15s;display:block;}
+    .card-nav a:hover{border-color:var(--purple);background:var(--purple-bg);color:var(--purple);}
+    .card-nav .ico{font-size:22px;margin-bottom:6px;}
+    .card-nav .cname{font-size:13px;font-weight:600;}
+    .card-nav .cdesc{font-size:11.5px;color:var(--text-s);margin-top:2px;}
+
+    /* CALLOUT */
+    .callout{border-left:3px solid var(--purple);background:var(--purple-bg);border-radius:0 8px 8px 0;padding:14px 16px;margin:16px 0;font-size:14px;color:#3730a3;}
+    .callout.yellow{border-color:var(--yellow);background:#fffbeb;color:#92400e;}
+    .callout.green{border-color:var(--green);background:#ecfdf5;color:#065f46;}
+    .callout strong{font-weight:600;}
+
+    /* CODE */
+    code{background:var(--code-bg);border:1px solid var(--purple-bd);padding:1px 5px;border-radius:4px;font-family:'SFMono-Regular','Menlo',monospace;font-size:12.5px;color:var(--purple-l);}
+    pre{background:#1e1b4b;border-radius:10px;padding:18px;overflow-x:auto;margin:16px 0;font-size:13px;line-height:1.6;}
+    pre code{background:none;border:none;padding:0;color:#c4b5fd;font-size:13px;}
+    pre code .kw{color:#a78bfa;}
+    pre code .cm{color:#6b7280;}
+
+    /* TABLE */
+    .tbl-wrap{overflow-x:auto;margin:16px 0;border-radius:10px;border:1px solid var(--border);}
+    table{width:100%;border-collapse:collapse;font-size:13.5px;}
+    th{background:var(--bg-m);padding:10px 14px;text-align:left;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-s);border-bottom:1px solid var(--border);}
+    td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+    tr:last-child td{border-bottom:none;}
+    tr:hover td{background:var(--bg-s);}
+
+    /* METHOD BADGES */
+    .m{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;font-family:monospace;vertical-align:middle;}
+    .m-get{background:#dbeafe;color:#1d4ed8;}
+    .m-post{background:#f3e8ff;color:#7e22ce;}
+    .m-put{background:#fef3c7;color:#b45309;}
+    .m-del{background:#fee2e2;color:#b91c1c;}
+
+    /* STATUS BADGES */
+    .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;}
+    .badge-green{background:#d1fae5;color:#065f46;}
+    .badge-yellow{background:#fef3c7;color:#92400e;}
+    .badge-blue{background:#dbeafe;color:#1d4ed8;}
+    .badge-purple{background:var(--purple-bg);color:var(--purple);}
+
+    /* DIAGRAM / FLOW */
+    .diagram{background:#1e1b4b;border-radius:10px;padding:20px;margin:16px 0;font-family:'SFMono-Regular',monospace;font-size:12.5px;line-height:1.9;color:#c4b5fd;overflow-x:auto;}
+    .flow-wrap{margin:16px 0;}
+    .flow-item{border-radius:8px;padding:12px 16px;margin-bottom:8px;font-size:13px;line-height:1.6;border-left:3px solid;}
+    .flow-item.input{background:#fffbeb;border-color:#f59e0b;color:#78350f;}
+    .flow-item.process{background:#f0fdf4;border-color:#10b981;color:#065f46;}
+    .flow-item.db{background:var(--purple-bg);border-color:var(--purple);color:#3730a3;}
+    .flow-item.output{background:#ecfdf5;border-color:var(--green);color:#065f46;}
+    .flow-item .flbl{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:3px;margin-right:6px;background:currentColor;opacity:.15;}
+    .flow-label{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;}
+    .fl-input{background:#fef3c7;color:#92400e;}
+    .fl-process{background:#d1fae5;color:#065f46;}
+    .fl-db{background:var(--purple-bg);color:var(--purple);}
+    .fl-out{background:#d1fae5;color:#065f46;}
+    .arrow-down{text-align:center;color:var(--text-xs);font-size:18px;line-height:1;margin:4px 0;}
+
+    /* TECH GRID */
+    .tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:16px 0;}
+    .tech-item{border:1px solid var(--border);border-radius:10px;padding:14px 12px;text-align:center;background:var(--bg-s);}
+    .tech-item .ico{font-size:20px;margin-bottom:6px;}
+    .tech-item .tn{font-size:13px;font-weight:600;color:var(--text);}
+    .tech-item .tv{font-size:11px;color:var(--text-s);margin-top:2px;}
+
+    /* CHECKLIST */
+    .check-group{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;}
+    .check-header{background:var(--purple-bg);padding:10px 16px;font-size:13px;font-weight:600;color:var(--purple);border-bottom:1px solid var(--purple-bd);}
+    .check-item{display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid var(--border);font-size:13px;gap:10px;}
+    .check-item:last-child{border-bottom:none;}
+    .check-item:hover{background:var(--bg-s);}
+    .check-icon{width:18px;height:18px;border-radius:50%;background:#d1fae5;border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .check-icon::after{content:'✓';font-size:10px;color:var(--green);font-weight:700;}
+    .check-label{flex:1;color:var(--text);}
+
+    /* ERD SVG */
+    .erd-wrap{background:#1e1b4b;border-radius:12px;padding:24px;overflow-x:auto;margin:16px 0;}
+    .erd-wrap svg{min-width:800px;width:100%;height:auto;}
+    .erd-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-size:12px;color:var(--text-s);}
+    .erd-legend-item{display:flex;align-items:center;gap:6px;}
+    .erd-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0;}
+
+    /* STEP GRID */
+    .step-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:20px 0;}
+    .step-card{border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;background:var(--bg-s);}
+    .step-num{width:32px;height:32px;border-radius:50%;background:var(--purple);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+    .step-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
+    .step-desc{font-size:12px;color:var(--text-s);line-height:1.5;}
+
+    /* FLOW 2-COL */
+    .flow-2col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0;}
+
+    /* FOOTER */
+    .doc-footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--text-xs);text-align:center;}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .sidebar{display:none;}
+      .main{padding:32px 24px 60px;}
+      .stats-grid{grid-template-columns:repeat(2,1fr);}
+      .flow-2col{grid-template-columns:1fr;}
+    }
+    @media(max-width:640px){
+      h1{font-size:28px;}
+      h2{font-size:20px;}
+      .main{padding:24px 16px 48px;}
+      .stats-grid{grid-template-columns:repeat(2,1fr);}
+      .card-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="topnav-logo" href="#overview">🏪 UMKM Sales System</a>
+  <span class="topnav-badge">PKL 2026/2027</span>
+  <div class="topnav-right">Kelompok 4 · SMK AS-SYAFI'IYAH 01 JAKARTA</div>
+</nav>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-group">
+      <div class="sidebar-label">Proyek</div>
+      <a href="#overview" onclick="setActive(this)">🏪 Overview</a>
+      <a href="#fitur" onclick="setActive(this)">✨ Fitur</a>
+      <a href="#techstack" onclick="setActive(this)">🛠 Tech Stack</a>
+      <a href="#setup" onclick="setActive(this)">🚀 Setup & Install</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Arsitektur</div>
+      <a href="#arsitektur" onclick="setActive(this)">🏗 MVC & Request Flow</a>
+      <a href="#auth" onclick="setActive(this)">🔐 Autentikasi</a>
+      <a href="#userflow" onclick="setActive(this)">👥 User Flow</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Database</div>
+      <a href="#erd" onclick="setActive(this)">🗺 ERD</a>
+      <a href="#database" onclick="setActive(this)">🗄 Skema Tabel</a>
+      <a href="#dbflow" onclick="setActive(this)">📊 Database Flow</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">API & Routes</div>
+      <a href="#api-public" onclick="setActive(this)">🌐 Public Routes</a>
+      <a href="#api-auth" onclick="setActive(this)">🔑 Auth Routes</a>
+      <a href="#api-admin" onclick="setActive(this)">👑 Admin Routes</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Status</div>
+      <a href="#checklist" onclick="setActive(this)">✅ Checklist Fitur</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <div class="content-section">
+
+      <!-- ===== OVERVIEW ===== -->
+      <section id="overview">
+        <div class="hero">
+          <div class="hero-tags">
+            <span class="tag purple">PKL 2026/2027</span>
+            <span class="tag">Laravel 11</span>
+            <span class="tag">PHP 8.2+</span>
+            <span class="tag">MariaDB</span>
+            <span class="tag">Kelompok 4</span>
+          </div>
+          <h1>UMKM Sales System</h1>
+          <p class="lead">Aplikasi web pencatatan penjualan untuk usaha kecil menengah (UMKM). Membantu pemilik usaha mencatat transaksi, mengelola inventaris, dan memantau laporan penjualan secara digital.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card"><div class="num">7</div><div class="lbl">Database Tables</div></div>
+          <div class="stat-card"><div class="num">11</div><div class="lbl">Controllers</div></div>
+          <div class="stat-card"><div class="num">30+</div><div class="lbl">HTTP Routes</div></div>
+          <div class="stat-card"><div class="num">100%</div><div class="lbl">Responsive</div></div>
+        </div>
+
+        <div class="callout">
+          <strong>Tujuan:</strong> Membantu pemilik UMKM mencatat dan melacak penjualan produk secara digital — manajemen inventaris, kategori produk, dan laporan penjualan real-time.
+        </div>
+
+        <h2>Navigasi Dokumentasi</h2>
+        <div class="card-nav">
+          <a href="#arsitektur"><div class="ico">🏗</div><div class="cname">Arsitektur</div><div class="cdesc">MVC, request flow, auth</div></a>
+          <a href="#database"><div class="ico">🗄</div><div class="cname">Database</div><div class="cdesc">7 tabel, relasi, FK</div></a>
+          <a href="#erd"><div class="ico">🗺</div><div class="cname">ERD</div><div class="cdesc">Entity Relationship Diagram</div></a>
+          <a href="#api-public"><div class="ico">🔗</div><div class="cname">API Routes</div><div class="cdesc">Semua endpoint HTTP</div></a>
+          <a href="#userflow"><div class="ico">👥</div><div class="cname">User Flow</div><div class="cdesc">Alur interaksi pengguna</div></a>
+          <a href="#dbflow"><div class="ico">📊</div><div class="cname">DB Flow</div><div class="cdesc">Alur data di database</div></a>
+        </div>
+      </section>
+
+      <!-- ===== FITUR ===== -->
+      <section id="fitur">
+        <h2>✨ Fitur Utama</h2>
+        <div class="card-grid">
+          <div class="card">
+            <h4>🔐 Autentikasi & Keamanan</h4>
+            <ul>
+              <li>User Registration & Login</li>
+              <li>Password Hashing (Bcrypt)</li>
+              <li>Session Management</li>
+              <li>Admin Authorization</li>
+              <li>Rate Limiting</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>🏢 Manajemen Profil</h4>
+            <ul>
+              <li>Setup Profil Bisnis</li>
+              <li>Data Pemilik UMKM</li>
+              <li>Kontak &amp; Alamat</li>
+              <li>Edit Profil</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>📦 Inventaris Produk</h4>
+            <ul>
+              <li>CRUD Kategori Produk</li>
+              <li>CRUD Produk</li>
+              <li>Manajemen Stok</li>
+              <li>Multi-unit Support</li>
+              <li>Status Aktif/Nonaktif</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>💳 Transaksi</h4>
+            <ul>
+              <li>Input Transaksi Penjualan</li>
+              <li>Multiple Items per Transaksi</li>
+              <li>Auto Kalkulasi Total</li>
+              <li>Transaction Code Unik</li>
+              <li>Catatan Transaksi</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>📈 Laporan & Analisis</h4>
+            <ul>
+              <li>Dashboard Ringkas</li>
+              <li>Total Revenue</li>
+              <li>Produk Terlaris</li>
+              <li>Chart &amp; Grafik</li>
+              <li>Export CSV</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>📝 Blog Publik</h4>
+            <ul>
+              <li>Blog Publik untuk Tamu</li>
+              <li>Admin Panel Blog</li>
+              <li>Publish/Draft Posts</li>
+              <li>SEO Friendly (Sitemap)</li>
+              <li>Responsive Design</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TECH STACK ===== -->
+      <section id="techstack">
+        <h2>🛠 Tech Stack</h2>
+        <div class="tech-grid">
+          <div class="tech-item"><div class="ico">🐘</div><div class="tn">Laravel</div><div class="tv">v11.0 — Framework</div></div>
+          <div class="tech-item"><div class="ico">💻</div><div class="tn">PHP</div><div class="tv">v8.2+ — Backend</div></div>
+          <div class="tech-item"><div class="ico">🗄</div><div class="tn">MariaDB</div><div class="tv">Database</div></div>
+          <div class="tech-item"><div class="ico">🌐</div><div class="tn">HTML5 + CSS3</div><div class="tv">Frontend</div></div>
+          <div class="tech-item"><div class="ico">⚡</div><div class="tn">JavaScript</div><div class="tv">Interactivity</div></div>
+          <div class="tech-item"><div class="ico">📦</div><div class="tn">Vite</div><div class="tv">Asset Bundler</div></div>
+          <div class="tech-item"><div class="ico">🔐</div><div class="tn">Sanctum</div><div class="tv">Authentication</div></div>
+          <div class="tech-item"><div class="ico">🎨</div><div class="tn">Blade</div><div class="tv">View Engine</div></div>
+          <div class="tech-item"><div class="ico">🔧</div><div class="tn">Composer</div><div class="tv">Package Manager</div></div>
+        </div>
+
+        <h3>Struktur Proyek</h3>
+        <div class="tbl-wrap">
+          <table>
+            <tr><th>Direktori</th><th>Fungsi</th></tr>
+            <tr><td><code>app/Http/Controllers/</code></td><td>Request handlers — RESTful pattern</td></tr>
+            <tr><td><code>app/Models/</code></td><td>Database models dengan relationships</td></tr>
+            <tr><td><code>app/Http/Middleware/</code></td><td>Request interceptors (auth, admin checks)</td></tr>
+            <tr><td><code>resources/views/</code></td><td>Blade templates (layout + features)</td></tr>
+            <tr><td><code>database/migrations/</code></td><td>Schema changes (ordered by date)</td></tr>
+            <tr><td><code>routes/web.php</code></td><td>Semua web routes (HTTP endpoints)</td></tr>
+            <tr><td><code>docs/PKL/</code></td><td>Dokumentasi presentasi PKL</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== SETUP ===== -->
+      <section id="setup">
+        <h2>🚀 Setup &amp; Install</h2>
+        <h3>Prerequisites</h3>
+        <ul>
+          <li>PHP 8.2+</li>
+          <li>MySQL 5.7+ atau MariaDB</li>
+          <li>Composer</li>
+          <li>Node.js 18+</li>
+        </ul>
+
+        <h3>Quick Start</h3>
+        <pre><code># Install dependencies
+composer install
+npm install
+
+# Setup environment
+cp .env.example .env
+php artisan key:generate
+
+# Database
+bash scripts/setup-database.sh
+
+# Build & jalankan
+npm run dev
+php artisan serve
+# Akses: http://localhost:8000</code></pre>
+
+        <h3>Production</h3>
+        <div class="card-grid">
+          <div class="card">
+            <h4>Development</h4>
+            <ul>
+              <li>Clone repository</li>
+              <li><code>composer install</code></li>
+              <li><code>npm install</code></li>
+              <li>Setup <code>.env</code> file</li>
+              <li><code>php artisan migrate</code></li>
+              <li><code>php artisan serve</code></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Production</h4>
+            <ul>
+              <li>Set <code>APP_ENV=production</code></li>
+              <li>Set <code>APP_DEBUG=false</code></li>
+              <li>Configure HTTPS/SSL</li>
+              <li>Setup database backup</li>
+              <li>Configure web server</li>
+              <li>Monitor logs &amp; performance</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Troubleshooting</h3>
+        <div class="callout yellow"><strong>MySQL access denied (SQLSTATE[1698]):</strong> Gunakan <code>sudo mysql</code> atau set <code>CACHE_STORE=file</code> dan <code>SESSION_DRIVER=file</code> di <code>.env</code>.</div>
+        <div class="callout yellow"><strong>Port 8000 occupied:</strong> <code>php artisan serve --port=8080</code></div>
+        <pre><code># Node modules error
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install</code></pre>
+      </section>
+
+      <!-- ===== ARSITEKTUR ===== -->
+      <section id="arsitektur">
+        <h2>🏗 MVC &amp; Request Flow</h2>
+        <div class="diagram">HTTP Request
+  ↓
+routes/web.php          (Route matching)
+  ↓
+Middleware              (Auth check, rate limit)
+  ↓
+Controller              (Request handling + validation)
+  ↓
+Model                   (Database queries)
+  ↓
+Database                (MySQL/MariaDB)
+  ↓
+Model returns data
+  ↓
+View (Blade template)   (Rendering)
+  ↓
+HTTP Response           (HTML ke browser)</div>
+
+        <h3>Contoh: Membuat Produk</h3>
+        <pre><code>1. User submit form
+   POST /products
+
+2. Route matching
+   Route::post('/products', [ProductController::class, 'store'])
+
+3. Middleware checks
+   - auth: User logged in?
+   - throttle: Rate limit OK?
+
+4. Controller processes
+   ProductController::store()
+   - Validate input
+   - Get auth user
+   - Create Product model
+   - Save to database
+
+5. Model relationships
+   Product belongsTo User
+   Product belongsTo Category
+   Product hasMany TransactionItems
+
+6. Response
+   Redirect /products with success message</code></pre>
+
+        <h3>Controller Pattern (RESTful)</h3>
+        <div class="tbl-wrap">
+          <table>
+            <tr><th>Action</th><th>Method</th><th>Route</th><th>Controller</th></tr>
+            <tr><td>List all</td><td><span class="m m-get">GET</span></td><td><code>/products</code></td><td><code>index()</code></td></tr>
+            <tr><td>Show form</td><td><span class="m m-get">GET</span></td><td><code>/products/create</code></td><td><code>create()</code></td></tr>
+            <tr><td>Save</td><td><span class="m m-post">POST</span></td><td><code>/products</code></td><td><code>store()</code></td></tr>
+            <tr><td>Edit form</td><td><span class="m m-get">GET</span></td><td><code>/products/{id}/edit</code></td><td><code>edit()</code></td></tr>
+            <tr><td>Update</td><td><span class="m m-put">PUT</span></td><td><code>/products/{id}</code></td><td><code>update()</code></td></tr>
+            <tr><td>Delete</td><td><span class="m m-del">DELETE</span></td><td><code>/products/{id}</code></td><td><code>destroy()</code></td></tr>
+          </table>
+        </div>
+
+        <h3>Data Isolation</h3>
+        <p>Semua query otomatis difilter berdasarkan <code>user_id</code>. User A tidak bisa akses data User B.</p>
+        <pre><code>// Products
+$products = Product::where('user_id', auth()->id())->get();
+
+// Transactions
+$transactions = Transaction::where('user_id', auth()->id())->get();
+
+// Reports
+$revenue = Transaction::where('user_id', auth()->id())->sum('total_amount');</code></pre>
+
+        <h3>Performance — Eager Loading</h3>
+        <pre><code>// BAD: N+1 queries (lambat)
+$products = Product::all();
+foreach ($products as $p) echo $p->category->name;
+
+// GOOD: 2 queries saja
+$products = Product::with('category')->get();</code></pre>
+      </section>
+
+      <!-- ===== AUTH ===== -->
+      <section id="auth">
+        <h2>🔐 Autentikasi &amp; Autorisasi</h2>
+        <h3>Login Flow</h3>
+        <div class="diagram">Login form submission
+  ↓
+LoginController::login()
+  ↓
+Hash(password) == users.password di DB?
+  ↓
+Session dibuat
+Simpan user_id ke session/cookie
+  ↓
+Redirect ke /dashboard
+  ↓
+Session persist di setiap request
+Logout → clear session</div>
+
+        <h3>Middleware-based (route level)</h3>
+        <pre><code>Route::middleware('auth')...        // Butuh login
+Route::middleware('admin')...       // Butuh is_admin=true
+Route::middleware('throttle:60,1')  // Rate limit 60/menit</code></pre>
+
+        <h3>Model-based (resource level)</h3>
+        <pre><code>// Cek ownership di controller
+$product = Product::find($id);
+if ($product->user_id !== auth()->id()) {
+    abort(403);  // User bukan pemilik resource ini
+}</code></pre>
+
+        <h3>Error Handling</h3>
+        <pre><code>// Validation error
+$validated = $request->validate([
+    'name'  => 'required|string|max:255',
+    'price' => 'required|numeric|min:0',
+]);
+// Returns 422 dengan error messages jika invalid
+
+// Authorization error
+abort(403); // Forbidden — user bukan pemilik
+abort(404); // Not Found — resource tidak ada</code></pre>
+
+        <h3>Cascade Delete</h3>
+        <div class="card-grid">
+          <div class="card">
+            <h4>ON DELETE CASCADE</h4>
+            <p style="font-size:13px;color:var(--text-s);">Jika user dihapus:</p>
+            <ul>
+              <li>Semua categories terhapus</li>
+              <li>Semua products terhapus</li>
+              <li>Semua transactions terhapus</li>
+              <li>Semua items terhapus</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>ON DELETE SET NULL</h4>
+            <p style="font-size:13px;color:var(--text-s);">Jika category dihapus:</p>
+            <ul>
+              <li>products.category_id → NULL</li>
+              <li>Product tetap ada (tidak terhapus)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>ON DELETE RESTRICT</h4>
+            <p style="font-size:13px;color:var(--text-s);">Jika product ada di transaksi:</p>
+            <ul>
+              <li>Delete diblokir</li>
+              <li>Mencegah kehilangan data</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== USER FLOW ===== -->
+      <section id="userflow">
+        <h2>👥 User Flow</h2>
+
+        <h3>Alur Pengguna Terautentikasi (Pemilik UMKM)</h3>
+        <div class="step-grid">
+          <div class="step-card"><div class="step-num">1</div><div class="step-title">Login</div><div class="step-desc">Masuk dengan email &amp; password. Validasi kredensial di database.</div></div>
+          <div class="step-card"><div class="step-num">2</div><div class="step-title">Dashboard</div><div class="step-desc">Tampilan ringkas: total penjualan, transaksi terbaru, produk aktif.</div></div>
+          <div class="step-card"><div class="step-num">3</div><div class="step-title">Setup Profil</div><div class="step-desc">Input data UMKM: nama, pemilik, alamat, kontak (sekali saja).</div></div>
+          <div class="step-card"><div class="step-num">4</div><div class="step-title">Kelola Kategori</div><div class="step-desc">CRUD kategori produk: tambah, ubah, hapus.</div></div>
+          <div class="step-card"><div class="step-num">5</div><div class="step-title">Kelola Produk</div><div class="step-desc">Manajemen inventaris: harga, stok, satuan, status aktif.</div></div>
+          <div class="step-card"><div class="step-num">6</div><div class="step-title">Catat Transaksi</div><div class="step-desc">Input penjualan: pilih produk, qty, hitung subtotal otomatis.</div></div>
+          <div class="step-card"><div class="step-num">7</div><div class="step-title">Lihat Laporan</div><div class="step-desc">Analisis penjualan: grafik, total revenue, export data CSV.</div></div>
+          <div class="step-card"><div class="step-num">8</div><div class="step-title">Logout</div><div class="step-desc">Keluar dari sistem dengan aman.</div></div>
+        </div>
+
+        <div class="flow-2col" style="margin-top:32px;">
+          <div>
+            <h3>Proses Input Transaksi Detail</h3>
+            <div class="flow-wrap">
+              <div class="flow-item input"><span class="flow-label fl-input">1</span> Buka Form Transaksi — navigasi ke halaman Transactions</div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-item input"><span class="flow-label fl-input">2</span> Input Data: tanggal penjualan + catatan (opsional)</div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-item input"><span class="flow-label fl-input">3</span> Tambah Item: pilih produk → qty → harga tersimpan otomatis</div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-item process"><span class="flow-label fl-process">4</span> Kalkulasi Otomatis: Subtotal = Qty × Harga Produk</div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-item db"><span class="flow-label fl-db">5</span> Simpan Transaksi — generate transaction_code unik</div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-item output"><span class="flow-label fl-out">✓</span> Transaksi tersimpan — redirect ke list transaksi</div>
+            </div>
+          </div>
+          <div>
+            <h3>Report &amp; Export Flow</h3>
+            <div class="flow-wrap">
+              <div class="flow-item input"><span class="flow-label fl-input">1</span> Akses menu Reports → lihat overview</div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-item input"><span class="flow-label fl-input">2</span> Filter Data (Opsional): range tanggal, kategori</div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-item process"><span class="flow-label fl-process">3</span> Lihat Statistik: total penjualan, produk terlaris, grafik trend</div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-item db"><span class="flow-label fl-db">?</span> Ingin Export? → Klik tombol Download CSV</div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-item output"><span class="flow-label fl-out">✓</span> File CSV diunduh — siap analisis di Excel/Sheets</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Admin Flow</h3>
+        <div class="flow-wrap">
+          <div class="flow-item input"><span class="flow-label fl-input">1</span> Admin Login dengan akun <code>is_admin = true</code></div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item db"><span class="flow-label fl-db">2</span> Akses Admin Dashboard — kelola blog dan konten publik</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item process"><span class="flow-label fl-process">3</span> Opsi: Buat artikel blog / Edit / Hapus / Publikasikan konten</div>
+        </div>
+      </section>
+
+      <!-- ===== ERD ===== -->
+      <section id="erd">
+        <h2>🗺 Entity Relationship Diagram (ERD)</h2>
+        <div class="erd-wrap">
+          <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',sans-serif">
+            <defs>
+              <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0,10 3,0 6" fill="#a78bfa"/>
+              </marker>
+            </defs>
+            <!-- USERS -->
+            <rect x="30" y="40" width="170" height="150" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+            <rect x="30" y="40" width="170" height="34" rx="6" fill="#6d28d9"/>
+            <text x="115" y="62" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">👤 Users</text>
+            <line x1="30" y1="74" x2="200" y2="74" stroke="#7c3aed" stroke-width="1"/>
+            <text x="46" y="94" fill="#fbbf24" font-size="11" font-weight="700">id (PK)</text>
+            <text x="46" y="112" fill="#c4b5fd" font-size="11">name</text>
+            <text x="46" y="130" fill="#c4b5fd" font-size="11">email (UNIQUE)</text>
+            <text x="46" y="148" fill="#c4b5fd" font-size="11">password</text>
+            <text x="46" y="166" fill="#c4b5fd" font-size="11">is_admin</text>
+            <!-- BUSINESS_PROFILES -->
+            <rect x="300" y="40" width="185" height="150" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+            <rect x="300" y="40" width="185" height="34" rx="6" fill="#6d28d9"/>
+            <text x="393" y="62" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">🏢 Business Profiles</text>
+            <line x1="300" y1="74" x2="485" y2="74" stroke="#7c3aed" stroke-width="1"/>
+            <text x="316" y="94" fill="#fbbf24" font-size="11" font-weight="700">id (PK)</text>
+            <text x="316" y="112" fill="#f87171" font-size="11">user_id (FK)</text>
+            <text x="316" y="130" fill="#c4b5fd" font-size="11">business_name</text>
+            <text x="316" y="148" fill="#c4b5fd" font-size="11">owner_name</text>
+            <text x="316" y="166" fill="#c4b5fd" font-size="11">address, phone</text>
+            <!-- CATEGORIES -->
+            <rect x="600" y="40" width="165" height="130" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+            <rect x="600" y="40" width="165" height="34" rx="6" fill="#6d28d9"/>
+            <text x="683" y="62" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">🏷 Categories</text>
+            <line x1="600" y1="74" x2="765" y2="74" stroke="#7c3aed" stroke-width="1"/>
+            <text x="616" y="94" fill="#fbbf24" font-size="11" font-weight="700">id (PK)</text>
+            <text x="616" y="112" fill="#f87171" font-size="11">user_id (FK)</text>
+            <text x="616" y="130" fill="#c4b5fd" font-size="11">name</text>
+            <text x="616" y="148" fill="#c4b5fd" font-size="11">description</text>
+            <!-- PRODUCTS -->
+            <rect x="990" y="40" width="185" height="168" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+            <rect x="990" y="40" width="185" height="34" rx="6" fill="#6d28d9"/>
+            <text x="1083" y="62" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">📦 Products</text>
+            <line x1="990" y1="74" x2="1175" y2="74" stroke="#7c3aed" stroke-width="1"/>
+            <text x="1006" y="94" fill="#fbbf24" font-size="11" font-weight="700">id (PK)</text>
+            <text x="1006" y="112" fill="#f87171" font-size="11">user_id (FK)</text>
+            <text x="1006" y="130" fill="#f87171" font-size="11">category_id (FK)</text>
+            <text x="1006" y="148" fill="#c4b5fd" font-size="11">name, price</text>
+            <text x="1006" y="166" fill="#c4b5fd" font-size="11">stock, unit</text>
+            <text x="1006" y="184" fill="#c4b5fd" font-size="11">is_active</text>
+            <!-- TRANSACTIONS -->
+            <rect x="150" y="400" width="205" height="150" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+            <rect x="150" y="400" width="205" height="34" rx="6" fill="#6d28d9"/>
+            <text x="253" y="422" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">💳 Transactions</text>
+            <line x1="150" y1="434" x2="355" y2="434" stroke="#7c3aed" stroke-width="1"/>
+            <text x="166" y="454" fill="#fbbf24" font-size="11" font-weight="700">id (PK)</text>
+            <text x="166" y="472" fill="#f87171" font-size="11">user_id (FK)</text>
+            <text x="166" y="490" fill="#c4b5fd" font-size="11">transaction_code</text>
+            <text x="166" y="508" fill="#c4b5fd" font-size="11">transaction_date</text>
+            <text x="166" y="526" fill="#c4b5fd" font-size="11">total_amount</text>
+            <!-- TRANSACTION_ITEMS -->
+            <rect x="530" y="400" width="205" height="150" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+            <rect x="530" y="400" width="205" height="34" rx="6" fill="#6d28d9"/>
+            <text x="633" y="422" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">📋 Transaction Items</text>
+            <line x1="530" y1="434" x2="735" y2="434" stroke="#7c3aed" stroke-width="1"/>
+            <text x="546" y="454" fill="#fbbf24" font-size="11" font-weight="700">id (PK)</text>
+            <text x="546" y="472" fill="#f87171" font-size="11">transaction_id (FK)</text>
+            <text x="546" y="490" fill="#f87171" font-size="11">product_id (FK)</text>
+            <text x="546" y="508" fill="#c4b5fd" font-size="11">product_name (snapshot)</text>
+            <text x="546" y="526" fill="#c4b5fd" font-size="11">price, qty, subtotal</text>
+            <!-- BLOG_POSTS -->
+            <rect x="890" y="400" width="175" height="130" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+            <rect x="890" y="400" width="175" height="34" rx="6" fill="#6d28d9"/>
+            <text x="978" y="422" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">📝 Blog Posts</text>
+            <line x1="890" y1="434" x2="1065" y2="434" stroke="#7c3aed" stroke-width="1"/>
+            <text x="906" y="454" fill="#fbbf24" font-size="11" font-weight="700">id (PK)</text>
+            <text x="906" y="472" fill="#c4b5fd" font-size="11">title, slug</text>
+            <text x="906" y="490" fill="#c4b5fd" font-size="11">content</text>
+            <text x="906" y="508" fill="#c4b5fd" font-size="11">published_at</text>
+            <!-- Relations -->
+            <path d="M200 115 L300 115" stroke="#a78bfa" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+            <text x="240" y="108" fill="#a78bfa" font-size="10">1:1</text>
+            <path d="M200 95 Q400 50 600 95" stroke="#a78bfa" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+            <text x="380" y="52" fill="#a78bfa" font-size="10">1:N</text>
+            <path d="M200 80 Q590 25 990 80" stroke="#a78bfa" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+            <text x="570" y="30" fill="#a78bfa" font-size="10">1:N</text>
+            <path d="M765 115 L990 115" stroke="#a78bfa" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+            <text x="860" y="108" fill="#a78bfa" font-size="10">1:N</text>
+            <path d="M115 190 L225 400" stroke="#a78bfa" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+            <text x="130" y="300" fill="#a78bfa" font-size="10">1:N</text>
+            <path d="M355 475 L530 475" stroke="#a78bfa" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+            <text x="430" y="468" fill="#a78bfa" font-size="10">1:N</text>
+            <path d="M1083 208 Q950 300 735 475" stroke="#a78bfa" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+            <text x="940" y="300" fill="#a78bfa" font-size="10">1:N</text>
+          </svg>
+        </div>
+        <div class="erd-legend">
+          <div class="erd-legend-item"><div class="erd-dot" style="background:#fbbf24;"></div><span>PK = Primary Key</span></div>
+          <div class="erd-legend-item"><div class="erd-dot" style="background:#f87171;"></div><span>FK = Foreign Key</span></div>
+          <div class="erd-legend-item"><div class="erd-dot" style="background:#a78bfa;"></div><span>Garis = Relasi antar tabel</span></div>
+          <div class="erd-legend-item"><span>1:1 = Satu ke Satu &nbsp;·&nbsp; 1:N = Satu ke Banyak</span></div>
+        </div>
+      </section>
+
+      <!-- ===== DATABASE ===== -->
+      <section id="database">
+        <h2>🗄 Skema Database</h2>
+        <div class="callout">7 tabel utama dengan 11 foreign keys dan cascade behavior yang terstruktur.</div>
+
+        <h3>users</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Kolom</th><th>Tipe</th><th>Keterangan</th></tr>
+          <tr><td><code>id</code></td><td>INT PRIMARY KEY</td><td>Auto-increment</td></tr>
+          <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>Nama user</td></tr>
+          <tr><td><code>email</code></td><td>VARCHAR(255) UNIQUE</td><td>Untuk login</td></tr>
+          <tr><td><code>password</code></td><td>VARCHAR(255)</td><td>Hashed (bcrypt)</td></tr>
+          <tr><td><code>is_admin</code></td><td>BOOLEAN</td><td>Flag admin</td></tr>
+          <tr><td><code>created_at, updated_at</code></td><td>TIMESTAMP</td><td>Auto-managed</td></tr>
+        </table></div>
+
+        <h3>business_profiles</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Kolom</th><th>Tipe</th><th>Keterangan</th></tr>
+          <tr><td><code>id</code></td><td>INT PRIMARY KEY</td><td></td></tr>
+          <tr><td><code>user_id</code></td><td>INT UNIQUE FK</td><td>References users (cascade delete)</td></tr>
+          <tr><td><code>business_name</code></td><td>VARCHAR(255)</td><td>Required</td></tr>
+          <tr><td><code>owner_name</code></td><td>VARCHAR(255)</td><td>Optional</td></tr>
+          <tr><td><code>address, phone</code></td><td>TEXT, VARCHAR(15)</td><td>Optional</td></tr>
+        </table></div>
+
+        <h3>products</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Kolom</th><th>Tipe</th><th>Keterangan</th></tr>
+          <tr><td><code>id</code></td><td>INT PRIMARY KEY</td><td></td></tr>
+          <tr><td><code>user_id</code></td><td>INT FK</td><td>References users</td></tr>
+          <tr><td><code>category_id</code></td><td>INT FK NULLABLE</td><td>References categories (set null)</td></tr>
+          <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>Required</td></tr>
+          <tr><td><code>price</code></td><td>DECIMAL(15,2)</td><td>Required, >= 0</td></tr>
+          <tr><td><code>stock</code></td><td>INT</td><td>Informational only</td></tr>
+          <tr><td><code>unit</code></td><td>VARCHAR(50)</td><td>pcs, box, kg, dll</td></tr>
+          <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>Toggle tanpa delete</td></tr>
+        </table></div>
+
+        <h3>transactions</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Kolom</th><th>Tipe</th><th>Keterangan</th></tr>
+          <tr><td><code>id</code></td><td>INT PRIMARY KEY</td><td></td></tr>
+          <tr><td><code>user_id</code></td><td>INT FK</td><td>References users</td></tr>
+          <tr><td><code>transaction_code</code></td><td>VARCHAR(255) UNIQUE</td><td>TRX-YYYYMMDD-XXXXX</td></tr>
+          <tr><td><code>transaction_date</code></td><td>DATE</td><td>Required</td></tr>
+          <tr><td><code>total_amount</code></td><td>DECIMAL(15,2)</td><td>Sum of subtotals</td></tr>
+          <tr><td><code>notes</code></td><td>TEXT</td><td>Optional</td></tr>
+        </table></div>
+
+        <h3>transaction_items</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Kolom</th><th>Tipe</th><th>Keterangan</th></tr>
+          <tr><td><code>id</code></td><td>INT PRIMARY KEY</td><td></td></tr>
+          <tr><td><code>transaction_id</code></td><td>INT FK</td><td>References transactions (cascade)</td></tr>
+          <tr><td><code>product_id</code></td><td>INT FK</td><td>References products (restrict)</td></tr>
+          <tr><td><code>product_name</code></td><td>VARCHAR(255)</td><td>Snapshot — untuk history</td></tr>
+          <tr><td><code>price</code></td><td>DECIMAL(15,2)</td><td>Snapshot harga saat jual</td></tr>
+          <tr><td><code>quantity</code></td><td>INT</td><td>Required, >= 1</td></tr>
+          <tr><td><code>subtotal</code></td><td>DECIMAL(15,2)</td><td>quantity × price</td></tr>
+        </table></div>
+
+        <h3>blog_posts</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Kolom</th><th>Tipe</th><th>Keterangan</th></tr>
+          <tr><td><code>id</code></td><td>INT PRIMARY KEY</td><td></td></tr>
+          <tr><td><code>title</code></td><td>VARCHAR(255)</td><td>Required</td></tr>
+          <tr><td><code>slug</code></td><td>VARCHAR(255) UNIQUE</td><td>URL-friendly</td></tr>
+          <tr><td><code>content</code></td><td>LONGTEXT</td><td>Blog body</td></tr>
+          <tr><td><code>published_at</code></td><td>TIMESTAMP NULL</td><td>NULL = draft</td></tr>
+        </table></div>
+
+        <h3>Foreign Keys</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Tabel</th><th>Kolom</th><th>References</th><th>On Delete</th></tr>
+          <tr><td>business_profiles</td><td><code>user_id</code></td><td>users(id)</td><td><span class="badge badge-purple">CASCADE</span></td></tr>
+          <tr><td>categories</td><td><code>user_id</code></td><td>users(id)</td><td><span class="badge badge-purple">CASCADE</span></td></tr>
+          <tr><td>products</td><td><code>user_id</code></td><td>users(id)</td><td><span class="badge badge-purple">CASCADE</span></td></tr>
+          <tr><td>products</td><td><code>category_id</code></td><td>categories(id)</td><td><span class="badge badge-yellow">SET NULL</span></td></tr>
+          <tr><td>transactions</td><td><code>user_id</code></td><td>users(id)</td><td><span class="badge badge-purple">CASCADE</span></td></tr>
+          <tr><td>transaction_items</td><td><code>transaction_id</code></td><td>transactions(id)</td><td><span class="badge badge-purple">CASCADE</span></td></tr>
+          <tr><td>transaction_items</td><td><code>product_id</code></td><td>products(id)</td><td><span class="badge badge-blue">RESTRICT</span></td></tr>
+        </table></div>
+
+        <h3>Query Examples</h3>
+        <pre><code>-- Total revenue user
+SELECT SUM(total_amount) FROM transactions WHERE user_id = ?;
+
+-- Top selling products
+SELECT product_id, product_name, SUM(quantity) as qty_sold
+FROM transaction_items
+WHERE transaction_id IN (SELECT id FROM transactions WHERE user_id = ?)
+GROUP BY product_id, product_name
+ORDER BY qty_sold DESC LIMIT 10;
+
+-- Low stock products
+SELECT * FROM products WHERE user_id = ? AND stock < 5 AND is_active = true;</code></pre>
+      </section>
+
+      <!-- ===== DATABASE FLOW ===== -->
+      <section id="dbflow">
+        <h2>📊 Database Flow</h2>
+
+        <h3>1. Data Flow: User Registration</h3>
+        <div class="flow-wrap">
+          <div class="flow-item input"><span class="flow-label fl-input">INPUT</span> User submit form: name, email, password</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item input"><span class="flow-label fl-input">VALIDASI</span> Email valid · Email belum ada di DB · Password min 8 chars &amp; confirmed</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item process"><span class="flow-label fl-process">PROSES</span> Hash password dengan bcrypt · Set is_admin = false (default)</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item db"><span class="flow-label fl-db">INSERT</span> INSERT INTO users (name, email, password, is_admin, created_at, updated_at) VALUES (…)</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item output"><span class="flow-label fl-out">OUTPUT</span> ✓ User account created · ✓ Redirect ke login page</div>
+        </div>
+
+        <h3>2. Data Flow: Create Transaction</h3>
+        <div class="callout green"><strong>Catatan:</strong> Setiap transaction_item menyimpan snapshot product_name dan price pada saat transaksi. Jika product price berubah nanti, history transaksi tetap akurat.</div>
+        <div class="flow-wrap">
+          <div class="flow-item input"><span class="flow-label fl-input">INPUT</span> transaction_date: 2024-01-10 · notes: Penjualan offline</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item db"><span class="flow-label fl-db">INSERT</span> INSERT INTO transactions (user_id, transaction_date, notes, created_at) → <strong>Generated code:</strong> TRX-20240110-00001</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item input"><span class="flow-label fl-input">ITEM 1</span> Product: Laptop Dell (ID:42) · Qty: 2 · Price: 8.500.000 · Subtotal: 17.000.000</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item db"><span class="flow-label fl-db">INSERT</span> INSERT INTO transaction_items (transaction_id, product_id, product_name, price, quantity, subtotal) VALUES (15, 42, 'Laptop Dell', 8500000, 2, 17000000)</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item input"><span class="flow-label fl-input">ITEM 2</span> Product: Mouse Wireless (ID:35) · Qty: 3 · Price: 150.000 · Subtotal: 450.000</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item db"><span class="flow-label fl-db">INSERT</span> INSERT INTO transaction_items … VALUES (15, 35, 'Mouse Wireless', 150000, 3, 450000)</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item process"><span class="flow-label fl-process">HITUNG</span> total_amount = 17.000.000 + 450.000 = 17.450.000</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item db"><span class="flow-label fl-db">UPDATE</span> UPDATE transactions SET total_amount = 17450000 WHERE id = 15</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item output"><span class="flow-label fl-out">✓</span> Transaction TRX-20240110-00001 · Total Rp 17.450.000 · 2 items recorded</div>
+        </div>
+
+        <h3>3. Data Flow: Generate Report</h3>
+        <div class="flow-wrap">
+          <div class="flow-item input"><span class="flow-label fl-input">REQUEST</span> User klik /reports</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item db"><span class="flow-label fl-db">QUERY 1</span> SELECT SUM(total_amount) FROM transactions WHERE user_id = 1 → <code>Rp 125.500.000</code></div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item db"><span class="flow-label fl-db">QUERY 2</span> SELECT product_name, SUM(quantity) FROM transaction_items … GROUP BY product_id ORDER BY total_qty DESC → <code>Top 10 produk</code></div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item db"><span class="flow-label fl-db">QUERY 3</span> SELECT COUNT(*) FROM transactions WHERE user_id = 1 → <code>42 transactions</code></div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item output"><span class="flow-label fl-out">RENDER</span> Total Revenue: Rp 125,5 juta · Transaction Count: 42 · Top Products Chart · Monthly Trend</div>
+          <div class="arrow-down">↓</div>
+          <div class="flow-item output"><span class="flow-label fl-out">EXPORT</span> Download transactions.csv untuk analisis di Excel</div>
+        </div>
+      </section>
+
+      <!-- ===== API PUBLIC ===== -->
+      <section id="api-public">
+        <h2>🌐 Public Routes</h2>
+        <div class="tbl-wrap"><table>
+          <tr><th>Method</th><th>Route</th><th>Keterangan</th></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/</code></td><td>Homepage (publik)</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/blog</code></td><td>Blog listing (published posts saja)</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/blog/{slug}</code></td><td>Blog post detail</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/sitemap.xml</code></td><td>SEO sitemap</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/robots.txt</code></td><td>Robots directive</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/login</code></td><td>Form login</td></tr>
+          <tr><td><span class="m m-post">POST</span></td><td><code>/login</code></td><td>Submit kredensial — rate limit: 5x per 10 menit</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/register</code></td><td>Form registrasi</td></tr>
+          <tr><td><span class="m m-post">POST</span></td><td><code>/register</code></td><td>Buat akun — rate limit: 5x per 10 menit</td></tr>
+          <tr><td><span class="m m-post">POST</span></td><td><code>/logout</code></td><td>Akhiri sesi</td></tr>
+        </table></div>
+      </section>
+
+      <!-- ===== API AUTH ===== -->
+      <section id="api-auth">
+        <h2>🔑 Authenticated Routes</h2>
+        <p>Semua route ini butuh login. Rate limit: <code>throttle:60,1</code> (60 req/menit).</p>
+
+        <h3>Dashboard &amp; Business Profile</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Method</th><th>Route</th><th>Keterangan</th></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/dashboard</code></td><td>User dashboard (ringkasan)</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/business/edit</code></td><td>Form edit profil bisnis</td></tr>
+          <tr><td><span class="m m-put">PUT</span></td><td><code>/business</code></td><td>Update profil bisnis</td></tr>
+        </table></div>
+
+        <h3>Categories (RESTful)</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Method</th><th>Route</th><th>Keterangan</th></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/categories</code></td><td>List semua kategori</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/categories/create</code></td><td>Form tambah kategori</td></tr>
+          <tr><td><span class="m m-post">POST</span></td><td><code>/categories</code></td><td>Simpan kategori baru</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/categories/{id}/edit</code></td><td>Form edit kategori</td></tr>
+          <tr><td><span class="m m-put">PUT</span></td><td><code>/categories/{id}</code></td><td>Update kategori</td></tr>
+          <tr><td><span class="m m-del">DELETE</span></td><td><code>/categories/{id}</code></td><td>Hapus kategori</td></tr>
+        </table></div>
+
+        <h3>Products (RESTful)</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Method</th><th>Route</th><th>Keterangan</th></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/products</code></td><td>List semua produk</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/products/create</code></td><td>Form tambah produk</td></tr>
+          <tr><td><span class="m m-post">POST</span></td><td><code>/products</code></td><td>Simpan produk baru</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/products/{id}/edit</code></td><td>Form edit produk</td></tr>
+          <tr><td><span class="m m-put">PUT</span></td><td><code>/products/{id}</code></td><td>Update produk</td></tr>
+          <tr><td><span class="m m-del">DELETE</span></td><td><code>/products/{id}</code></td><td>Hapus produk</td></tr>
+        </table></div>
+
+        <h3>Transactions</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Method</th><th>Route</th><th>Keterangan</th></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/transactions</code></td><td>List semua transaksi</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/transactions/create</code></td><td>Form input transaksi</td></tr>
+          <tr><td><span class="m m-post">POST</span></td><td><code>/transactions</code></td><td>Simpan transaksi baru</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/transactions/{id}</code></td><td>Detail transaksi</td></tr>
+          <tr><td><span class="m m-del">DELETE</span></td><td><code>/transactions/{id}</code></td><td>Hapus transaksi</td></tr>
+        </table></div>
+
+        <h3>Reports</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Method</th><th>Route</th><th>Keterangan</th></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/reports</code></td><td>Report dashboard</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/reports/export</code></td><td>Export ke CSV</td></tr>
+        </table></div>
+
+        <h3>Contoh: Create Transaction</h3>
+        <pre><code>POST /transactions
+
+Body (form):
+  transaction_date: 2024-01-10
+  notes: Penjualan offline
+  items[0][product_id]: 5
+  items[0][quantity]: 2
+  items[1][product_id]: 12
+  items[1][quantity]: 1
+
+Response (sukses):
+  Status: 302 Found
+  Location: /transactions
+  Flash: "Transaction TRX-20240110-00001 created"
+
+Response (validasi error):
+  Status: 422 Unprocessable Entity
+  errors['items'] = ["At least one item required"]</code></pre>
+      </section>
+
+      <!-- ===== API ADMIN ===== -->
+      <section id="api-admin">
+        <h2>👑 Admin Routes</h2>
+        <p>Butuh <code>is_admin = true</code>. Rate limit: <code>throttle:60,1</code>.</p>
+
+        <div class="tbl-wrap"><table>
+          <tr><th>Method</th><th>Route</th><th>Keterangan</th></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/admin/blog</code></td><td>List semua blog posts</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/admin/blog/create</code></td><td>Form buat post baru</td></tr>
+          <tr><td><span class="m m-post">POST</span></td><td><code>/admin/blog</code></td><td>Simpan post</td></tr>
+          <tr><td><span class="m m-get">GET</span></td><td><code>/admin/blog/{id}/edit</code></td><td>Form edit post</td></tr>
+          <tr><td><span class="m m-put">PUT</span></td><td><code>/admin/blog/{id}</code></td><td>Update post</td></tr>
+          <tr><td><span class="m m-del">DELETE</span></td><td><code>/admin/blog/{id}</code></td><td>Hapus post</td></tr>
+        </table></div>
+
+        <h3>Middleware Stack</h3>
+        <div class="card-grid">
+          <div class="card">
+            <h4>Authenticated Routes</h4>
+            <ul>
+              <li><code>web</code> — Session, CSRF tokens</li>
+              <li><code>auth</code> — Cek sudah login</li>
+              <li><code>throttle:60,1</code> — Rate limit 60/menit</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Admin Routes</h4>
+            <ul>
+              <li><code>web</code></li>
+              <li><code>auth</code></li>
+              <li><code>admin</code> — Cek is_admin = true</li>
+              <li><code>throttle:60,1</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>HTTP Response Codes</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>Status</th><th>Kondisi</th></tr>
+          <tr><td><span class="badge badge-green">200 OK</span></td><td>Request berhasil</td></tr>
+          <tr><td><span class="badge badge-blue">302 Found</span></td><td>Redirect dengan flash message</td></tr>
+          <tr><td><span class="badge badge-yellow">422 Unprocessable</span></td><td>Validasi gagal — form dikembalikan dengan errors</td></tr>
+          <tr><td><span class="badge" style="background:#fee2e2;color:#991b1b;">403 Forbidden</span></td><td>User bukan pemilik resource / bukan admin</td></tr>
+          <tr><td><span class="badge" style="background:#fee2e2;color:#991b1b;">404 Not Found</span></td><td>Route atau resource tidak ada</td></tr>
+          <tr><td><span class="badge" style="background:#fee2e2;color:#991b1b;">429 Too Many</span></td><td>Rate limit terlampaui</td></tr>
+        </table></div>
+      </section>
+
+      <!-- ===== CHECKLIST ===== -->
+      <section id="checklist">
+        <h2>✅ Checklist Implementasi Fitur</h2>
+
+        <div class="check-group">
+          <div class="check-header">🔐 Authentication &amp; Authorization</div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">User Registration dengan validasi email</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">User Login dengan password hashing</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Session management &amp; logout</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Admin authorization middleware</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Rate limiting pada login</span><span class="badge badge-green">DONE</span></div>
+        </div>
+
+        <div class="check-group">
+          <div class="check-header">🏢 Business Profile Management</div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Setup profil bisnis saat pertama login</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">CRUD business profile</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Menyimpan data owner, alamat, kontak</span><span class="badge badge-green">DONE</span></div>
+        </div>
+
+        <div class="check-group">
+          <div class="check-header">📦 Inventory Management</div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">CRUD Category dengan user ownership</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">CRUD Product dengan stok &amp; harga</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Product dapat aktif/nonaktif</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Multi-unit support (pcs, box, dll)</span><span class="badge badge-green">DONE</span></div>
+        </div>
+
+        <div class="check-group">
+          <div class="check-header">💳 Transaction Management</div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Input transaksi dengan multiple items</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Auto kalkulasi subtotal &amp; total</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Generate transaction code unik</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">View transaksi dengan detail items</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Delete transaksi (cascade delete items)</span><span class="badge badge-green">DONE</span></div>
+        </div>
+
+        <div class="check-group">
+          <div class="check-header">📈 Reports &amp; Analytics</div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Dashboard dengan statistik ringkas</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Total revenue calculation</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Top selling products report</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Export data ke CSV</span><span class="badge badge-green">DONE</span></div>
+        </div>
+
+        <div class="check-group">
+          <div class="check-header">📝 Blog Management</div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Public blog view dengan published posts</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Admin panel untuk manage blog</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Publish/Draft/Delete blog posts</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">SEO friendly URLs &amp; sitemap</span><span class="badge badge-green">DONE</span></div>
+        </div>
+
+        <div class="check-group">
+          <div class="check-header">🛡 Security &amp; Performance</div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">CSRF protection di semua forms</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">SQL injection prevention via ORM</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">User ownership validation</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Eager loading untuk optimize queries</span><span class="badge badge-green">DONE</span></div>
+          <div class="check-item"><div class="check-icon"></div><span class="check-label">Responsive design mobile-friendly</span><span class="badge badge-green">DONE</span></div>
+        </div>
+
+        <div class="doc-footer">
+          <p><strong>UMKM Sales System</strong> — Aplikasi Web Pencatatan Penjualan UMKM</p>
+          <p style="margin-top:8px;">Kelompok 4 · SMK AS-SYAFI'IYAH 01 JAKARTA · PKL 2026/2027</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  function setActive(el){
+    document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
+    el.classList.add('active');
+  }
+  // Highlight sidebar on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.sidebar a');
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const a = document.querySelector('.sidebar a[href="#'+e.target.id+'"]');
+        if(a) a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-56px 0px -60% 0px',threshold:0});
+  sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

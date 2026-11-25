@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture - UMKM Sales System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #111;
+            background: #fff;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 24px;
+            margin-top: 48px;
+            margin-bottom: 24px;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+        }
+        h3 {
+            font-size: 16px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        p {
+            margin-bottom: 16px;
+            color: #333;
+        }
+        ul, ol {
+            margin-bottom: 24px;
+            padding-left: 24px;
+        }
+        li {
+            margin-bottom: 8px;
+            color: #333;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            color: #d63384;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #111;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        th {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid #ddd;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .diagram {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            margin: 24px 0;
+            font-family: 'Monaco', monospace;
+            font-size: 12px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        .card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .card ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+        .card li {
+            margin-bottom: 6px;
+        }
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            z-index: 100;
+            padding: 16px 0;
+        }
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        .nav h1 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .nav a {
+            font-size: 14px;
+            margin-left: 24px;
+        }
+        body {
+            padding-top: 60px;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            h2 { font-size: 20px; }
+            .container { padding: 40px 20px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="container">
+            <h1>UMKM Sales</h1>
+            <div>
+                <a href="README.html">Overview</a>
+                <a href="ARCHITECTURE.html">Architecture</a>
+                <a href="DATABASE.html">Database</a>
+                <a href="API.html">API</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Architecture</h1>
+        <p class="subtitle">System design and request flow</p>
+
+        <h2>MVC Pattern</h2>
+        <div class="diagram">
+HTTP Request
+    ↓
+routes/web.php (Route matching)
+    ↓
+Middleware (Auth check, rate limit)
+    ↓
+Controller (Request handling + validation)
+    ↓
+Model (Database queries)
+    ↓
+Database (MySQL/MariaDB)
+    ↓
+Model returns data
+    ↓
+View (Blade template rendering)
+    ↓
+HTTP Response (HTML to browser)</div>
+
+        <h2>Request Flow Example</h2>
+        <h3>Creating a Product</h3>
+        <pre><code>1. User submits form
+   POST /products
+
+2. Route matches
+   Route::post('/products', [ProductController::class, 'store'])
+
+3. Middleware checks
+   - auth: User logged in?
+   - throttle: Rate limit OK?
+
+4. Controller processes
+   ProductController::store()
+   - Validate input
+   - Get auth user
+   - Create Product model
+   - Save to database
+
+5. Model relationships
+   Product belongsTo User
+   Product belongsTo Category
+   Product hasMany TransactionItems
+
+6. Response
+   Redirect /products with success message</code></pre>
+
+        <h2>Authentication Flow</h2>
+        <div class="diagram">
+Login form submission
+    ↓
+LoginController::login()
+    ↓
+Hash(password) == users.password in DB?
+    ↓
+Session created
+Store user_id in session/cookie
+    ↓
+Redirect to dashboard
+    ↓
+Session persists on every request
+Logout clears session</div>
+
+        <h2>Authorization</h2>
+        <p>Two levels of access control:</p>
+        
+        <h3>Middleware-based (route level)</h3>
+        <pre><code>Route::middleware('auth')...       // Requires login
+Route::middleware('admin')...      // Requires is_admin=true
+Route::middleware('throttle:60,1') // Rate limit</code></pre>
+
+        <h3>Model-based (resource level)</h3>
+        <pre><code>// In controller - check user ownership
+$product = Product::find($id);
+if ($product->user_id !== auth()->id()) {
+    abort(403);  // User doesn't own this resource
+}</code></pre>
+
+        <p>Every resource is scoped to the authenticated user. User A cannot access User B's data.</p>
+
+        <h2>Data Isolation</h2>
+        <p>All queries include user_id filter:</p>
+        <pre><code>// Products
+$products = Product::where('user_id', auth()->id())->get();
+
+// Transactions
+$transactions = Transaction::where('user_id', auth()->id())->get();
+
+// Reports
+$revenue = Transaction::where('user_id', auth()->id())->sum('total_amount');</code></pre>
+
+        <h2>Database Relationships</h2>
+        <div class="diagram">
+User (1)
+  ├──1:1──> BusinessProfile
+  ├──1:N──> Category
+  ├──1:N──> Product
+  │          └──1:N──> TransactionItem
+  └──1:N──> Transaction
+              └──1:N──> TransactionItem
+                         └──M:N──> Product
+
+BlogPost (standalone)</div>
+
+        <h2>Cascade Behavior</h2>
+        <div class="grid">
+            <div class="card">
+                <h4>ON DELETE CASCADE</h4>
+                <p>If user deleted:</p>
+                <ul>
+                    <li>All categories deleted</li>
+                    <li>All products deleted</li>
+                    <li>All transactions deleted</li>
+                    <li>All items deleted</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>ON DELETE SET NULL</h4>
+                <p>If category deleted:</p>
+                <ul>
+                    <li>Products.category_id → NULL</li>
+                    <li>Product remains (not deleted)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>ON DELETE RESTRICT</h4>
+                <p>If product in transaction:</p>
+                <ul>
+                    <li>Delete blocked</li>
+                    <li>Prevents data loss</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Controller Pattern</h2>
+        <p>RESTful convention followed across all controllers:</p>
+        <table>
+            <tr>
+                <th>Action</th>
+                <th>HTTP Method</th>
+                <th>Route</th>
+                <th>Controller Method</th>
+            </tr>
+            <tr>
+                <td>List all</td>
+                <td>GET</td>
+                <td>/products</td>
+                <td>index()</td>
+            </tr>
+            <tr>
+                <td>Show form</td>
+                <td>GET</td>
+                <td>/products/create</td>
+                <td>create()</td>
+            </tr>
+            <tr>
+                <td>Save</td>
+                <td>POST</td>
+                <td>/products</td>
+                <td>store()</td>
+            </tr>
+            <tr>
+                <td>Edit form</td>
+                <td>GET</td>
+                <td>/products/{id}/edit</td>
+                <td>edit()</td>
+            </tr>
+            <tr>
+                <td>Update</td>
+                <td>PUT</td>
+                <td>/products/{id}</td>
+                <td>update()</td>
+            </tr>
+            <tr>
+                <td>Delete</td>
+                <td>DELETE</td>
+                <td>/products/{id}</td>
+                <td>destroy()</td>
+            </tr>
+        </table>
+
+        <h2>File Organization</h2>
+        <table>
+            <tr>
+                <th>Location</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td><code>app/Http/Controllers/</code></td>
+                <td>Request handlers (RESTful pattern)</td>
+            </tr>
+            <tr>
+                <td><code>app/Models/</code></td>
+                <td>Database models with relationships</td>
+            </tr>
+            <tr>
+                <td><code>app/Http/Middleware/</code></td>
+                <td>Request interceptors (auth, admin checks)</td>
+            </tr>
+            <tr>
+                <td><code>resources/views/</code></td>
+                <td>Blade templates (layout + features)</td>
+            </tr>
+            <tr>
+                <td><code>database/migrations/</code></td>
+                <td>Schema changes (ordered by date)</td>
+            </tr>
+            <tr>
+                <td><code>routes/web.php</code></td>
+                <td>All web routes (HTTP endpoints)</td>
+            </tr>
+        </table>
+
+        <h2>View Rendering</h2>
+        <p>Blade templates in <code>resources/views/</code>:</p>
+        <pre><code>resources/views/
+├── auth/
+│   ├── login.blade.php
+│   └── register.blade.php
+├── dashboard/
+│   └── index.blade.php
+├── products/
+│   ├── index.blade.php
+│   ├── create.blade.php
+│   └── edit.blade.php
+└── layouts/
+    └── app.blade.php  (header, footer, nav)</code></pre>
+
+        <h2>Migrations & Schema</h2>
+        <p>Run in order, rollback reverses:</p>
+        <pre><code>2024_01_01_create_users_table.php
+2024_01_02_create_business_profiles_table.php
+2024_01_03_create_categories_table.php
+2024_01_04_create_products_table.php
+2024_01_05_create_transactions_table.php
+2024_01_06_create_transaction_items_table.php</code></pre>
+
+        <h2>Error Handling</h2>
+        <h3>Validation Errors</h3>
+        <pre><code>$validated = $request->validate([
+    'name' => 'required|string|max:255',
+    'price' => 'required|numeric|min:0',
+]);
+// Returns 422 with error messages if invalid</code></pre>
+
+        <h3>Authorization Errors</h3>
+        <pre><code>abort(403);  // Forbidden (user not owner)
+abort(404);  // Not Found (resource doesn't exist)</code></pre>
+
+        <h2>Performance</h2>
+        <h3>Eager Loading</h3>
+        <pre><code>// Bad: N+1 queries
+$products = Product::all();
+foreach ($products as $p) echo $p->category->name;
+
+// Good: 2 queries
+$products = Product::with('category')->get();</code></pre>
+
+        <h3>Query Optimization</h3>
+        <ul>
+            <li>Foreign keys indexed automatically</li>
+            <li>Select only needed columns</li>
+            <li>Pagination on large lists</li>
+            <li>Cache expensive queries</li>
+        </ul>
+
+        <h2>Deployment</h2>
+        <ul>
+            <li>Set <code>APP_ENV=production</code></li>
+            <li>Set <code>APP_DEBUG=false</code></li>
+            <li>Configure HTTPS/SSL</li>
+            <li>Run <code>php artisan migrate</code></li>
+            <li>Setup automated backups</li>
+            <li>Monitor error logs</li>
+        </ul>
+
+        <p style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 13px;">
+            See <a href="DATABASE.html">Database</a> for schema details, <a href="API.html">API</a> for routes.
+        </p>
+    </div>
+</body>
+</html>

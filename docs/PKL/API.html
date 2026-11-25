@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Routes - UMKM Sales System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #111;
+            background: #fff;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 24px;
+            margin-top: 48px;
+            margin-bottom: 24px;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+        }
+        h3 {
+            font-size: 16px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        p {
+            margin-bottom: 16px;
+            color: #333;
+        }
+        ul, ol {
+            margin-bottom: 24px;
+            padding-left: 24px;
+        }
+        li {
+            margin-bottom: 8px;
+            color: #333;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            color: #d63384;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #111;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        th {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid #ddd;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .method {
+            display: inline-block;
+            font-weight: 600;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            margin-right: 8px;
+        }
+        .get { background: #e3f2fd; color: #1976d2; }
+        .post { background: #f3e5f5; color: #7b1fa2; }
+        .put { background: #fff3e0; color: #f57c00; }
+        .delete { background: #ffebee; color: #c62828; }
+        .route {
+            font-family: 'Monaco', monospace;
+            font-size: 13px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        .card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .card ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+        .card li {
+            margin-bottom: 6px;
+        }
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            z-index: 100;
+            padding: 16px 0;
+        }
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        .nav h1 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .nav a {
+            font-size: 14px;
+            margin-left: 24px;
+        }
+        body {
+            padding-top: 60px;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            h2 { font-size: 20px; }
+            .container { padding: 40px 20px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="container">
+            <h1>UMKM Sales</h1>
+            <div>
+                <a href="README.html">Overview</a>
+                <a href="ARCHITECTURE.html">Architecture</a>
+                <a href="DATABASE.html">Database</a>
+                <a href="API.html">API</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>API Routes</h1>
+        <p class="subtitle">HTTP endpoints and request/response documentation</p>
+
+        <h2>Public Routes</h2>
+
+        <h3>Homepage & Blog</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/</td>
+                <td>Homepage (public)</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/blog</td>
+                <td>Blog listing (published posts only)</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/blog/{slug}</td>
+                <td>Blog post detail</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/sitemap.xml</td>
+                <td>SEO sitemap</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/robots.txt</td>
+                <td>Robots directive</td>
+            </tr>
+        </table>
+
+        <h2>Authentication Routes</h2>
+
+        <h3>Login</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/login</td>
+                <td>Login form</td>
+            </tr>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td class="route">/login</td>
+                <td>Submit credentials</td>
+            </tr>
+        </table>
+
+        <p>Rate limit: 5 attempts per 10 minutes</p>
+
+        <h3>Register</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/register</td>
+                <td>Registration form</td>
+            </tr>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td class="route">/register</td>
+                <td>Create account</td>
+            </tr>
+        </table>
+
+        <p>Rate limit: 5 registrations per 10 minutes</p>
+
+        <h3>Logout</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td class="route">/logout</td>
+                <td>End session</td>
+            </tr>
+        </table>
+
+        <h2>Authenticated Routes</h2>
+        <p>Require authentication. Rate limit: 60 requests/minute.</p>
+
+        <h3>Dashboard</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/dashboard</td>
+                <td>User dashboard (summary)</td>
+            </tr>
+        </table>
+
+        <h3>Business Profile</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/business/edit</td>
+                <td>Edit form</td>
+            </tr>
+            <tr>
+                <td><span class="method put">PUT</span></td>
+                <td class="route">/business</td>
+                <td>Update profile</td>
+            </tr>
+        </table>
+
+        <h3>Categories (RESTful)</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/categories</td>
+                <td>List all categories</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/categories/create</td>
+                <td>Create form</td>
+            </tr>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td class="route">/categories</td>
+                <td>Store new category</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/categories/{id}/edit</td>
+                <td>Edit form</td>
+            </tr>
+            <tr>
+                <td><span class="method put">PUT</span></td>
+                <td class="route">/categories/{id}</td>
+                <td>Update category</td>
+            </tr>
+            <tr>
+                <td><span class="method delete">DELETE</span></td>
+                <td class="route">/categories/{id}</td>
+                <td>Delete category</td>
+            </tr>
+        </table>
+
+        <h3>Products (RESTful)</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/products</td>
+                <td>List all products</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/products/create</td>
+                <td>Create form</td>
+            </tr>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td class="route">/products</td>
+                <td>Store new product</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/products/{id}/edit</td>
+                <td>Edit form</td>
+            </tr>
+            <tr>
+                <td><span class="method put">PUT</span></td>
+                <td class="route">/products/{id}</td>
+                <td>Update product</td>
+            </tr>
+            <tr>
+                <td><span class="method delete">DELETE</span></td>
+                <td class="route">/products/{id}</td>
+                <td>Delete product</td>
+            </tr>
+        </table>
+
+        <h3>Transactions</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/transactions</td>
+                <td>List all transactions</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/transactions/create</td>
+                <td>Create form</td>
+            </tr>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td class="route">/transactions</td>
+                <td>Store new transaction</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/transactions/{id}</td>
+                <td>View transaction detail</td>
+            </tr>
+            <tr>
+                <td><span class="method delete">DELETE</span></td>
+                <td class="route">/transactions/{id}</td>
+                <td>Delete transaction</td>
+            </tr>
+        </table>
+
+        <h3>Reports</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/reports</td>
+                <td>Report dashboard</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/reports/export</td>
+                <td>Export to CSV</td>
+            </tr>
+        </table>
+
+        <h2>Admin Routes</h2>
+        <p>Require admin authorization. Rate limit: 60 requests/minute.</p>
+
+        <h3>Blog Management</h3>
+        <table>
+            <tr>
+                <th style="width: 80px">Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/admin/blog</td>
+                <td>Blog list</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/admin/blog/create</td>
+                <td>Create form</td>
+            </tr>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td class="route">/admin/blog</td>
+                <td>Store post</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td class="route">/admin/blog/{id}/edit</td>
+                <td>Edit form</td>
+            </tr>
+            <tr>
+                <td><span class="method put">PUT</span></td>
+                <td class="route">/admin/blog/{id}</td>
+                <td>Update post</td>
+            </tr>
+            <tr>
+                <td><span class="method delete">DELETE</span></td>
+                <td class="route">/admin/blog/{id}</td>
+                <td>Delete post</td>
+            </tr>
+        </table>
+
+        <h2>Request & Response</h2>
+
+        <h3>Successful Response (HTML)</h3>
+        <pre><code>Status: 200 OK or 302 Found (redirect)
+Redirect with flash message:
+  session('message') = "Product created successfully"
+  session('alert') = "success"</code></pre>
+
+        <h3>Validation Error (HTML)</h3>
+        <pre><code>Status: 422 Unprocessable Entity
+Response: Form with error messages
+Fields: $errors['field_name'] = ["Error message"]
+Input: Old form data re-filled</code></pre>
+
+        <h3>Authorization Error</h3>
+        <pre><code>Status: 403 Forbidden
+User doesn't own resource or not authorized</code></pre>
+
+        <h3>Not Found</h3>
+        <pre><code>Status: 404 Not Found
+Route or resource doesn't exist</code></pre>
+
+        <h3>Rate Limit</h3>
+        <pre><code>Status: 429 Too Many Requests
+Wait before retrying</code></pre>
+
+        <h2>Create Transaction Example</h2>
+
+        <h3>Request</h3>
+        <pre><code>POST /transactions
+
+Body (form):
+  transaction_date: 2024-01-10
+  notes: Sale from store
+  items[0][product_id]: 5
+  items[0][quantity]: 2
+  items[1][product_id]: 12
+  items[1][quantity]: 1</code></pre>
+
+        <h3>Response (success)</h3>
+        <pre><code>Status: 302 Found
+Location: /transactions
+Flash: "Transaction TRX-20240110-00001 created"
+
+Database:
+  INSERT transactions 
+    (user_id, transaction_code, transaction_date, total_amount, notes)
+  INSERT transaction_items (2 rows)</code></pre>
+
+        <h3>Response (validation error)</h3>
+        <pre><code>Status: 422 Unprocessable Entity
+Form returned with:
+  errors['items'] = ["At least one item required"]
+  old form data re-filled</code></pre>
+
+        <h2>Export Report Example</h2>
+
+        <h3>Request</h3>
+        <pre><code>GET /reports/export</code></pre>
+
+        <h3>Response</h3>
+        <pre><code>Status: 200 OK
+Content-Type: text/csv
+Body (CSV):
+
+transaction_date,transaction_code,total_amount,item_count
+2024-01-05,TRX-20240105-00001,17450000,2
+2024-01-10,TRX-20240110-00001,5200000,3</code></pre>
+
+        <h2>Middleware Stack</h2>
+
+        <h3>All Authenticated Routes</h3>
+        <ul>
+            <li><code>web</code> — Session, CSRF tokens</li>
+            <li><code>auth</code> — Check logged in</li>
+            <li><code>throttle:60,1</code> — Rate limit 60/minute</li>
+        </ul>
+
+        <h3>Admin Routes</h3>
+        <ul>
+            <li><code>web</code></li>
+            <li><code>auth</code></li>
+            <li><code>admin</code> — Check is_admin = true</li>
+            <li><code>throttle:60,1</code></li>
+        </ul>
+
+        <h2>Data Scoping</h2>
+
+        <p>All data automatically scoped to authenticated user. Queries include <code>where('user_id', auth()->id())</code></p>
+
+        <ul>
+            <li>User A cannot see User B's products</li>
+            <li>User A cannot see User B's transactions</li>
+            <li>User A cannot see User B's reports</li>
+            <li>Only admins can manage blog</li>
+        </ul>
+
+        <p style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 13px;">
+            See <a href="ARCHITECTURE.html">Architecture</a> for request flow details.
+        </p>
+    </div>
+</body>
+</html>

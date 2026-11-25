@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database - UMKM Sales System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #111;
+            background: #fff;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 24px;
+            margin-top: 48px;
+            margin-bottom: 24px;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+        }
+        h3 {
+            font-size: 16px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        p {
+            margin-bottom: 16px;
+            color: #333;
+        }
+        ul, ol {
+            margin-bottom: 24px;
+            padding-left: 24px;
+        }
+        li {
+            margin-bottom: 8px;
+            color: #333;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            color: #d63384;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #111;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        th {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid #ddd;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .diagram {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            margin: 24px 0;
+            font-family: 'Monaco', monospace;
+            font-size: 12px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        .card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .card ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+        .card li {
+            margin-bottom: 6px;
+        }
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            z-index: 100;
+            padding: 16px 0;
+        }
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        .nav h1 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .nav a {
+            font-size: 14px;
+            margin-left: 24px;
+        }
+        body {
+            padding-top: 60px;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            h2 { font-size: 20px; }
+            .container { padding: 40px 20px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="container">
+            <h1>UMKM Sales</h1>
+            <div>
+                <a href="README.html">Overview</a>
+                <a href="ARCHITECTURE.html">Architecture</a>
+                <a href="DATABASE.html">Database</a>
+                <a href="API.html">API</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Database Schema</h1>
+        <p class="subtitle">7 tables with relationships and constraints</p>
+
+        <h2>Tables</h2>
+
+        <h3>users</h3>
+        <p>User accounts and authentication.</p>
+        <table>
+            <tr>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>id</code></td>
+                <td>INT PRIMARY KEY</td>
+                <td>Auto-increment</td>
+            </tr>
+            <tr>
+                <td><code>name</code></td>
+                <td>VARCHAR(255)</td>
+                <td>User name</td>
+            </tr>
+            <tr>
+                <td><code>email</code></td>
+                <td>VARCHAR(255) UNIQUE</td>
+                <td>For login</td>
+            </tr>
+            <tr>
+                <td><code>password</code></td>
+                <td>VARCHAR(255)</td>
+                <td>Hashed (bcrypt)</td>
+            </tr>
+            <tr>
+                <td><code>is_admin</code></td>
+                <td>BOOLEAN</td>
+                <td>Admin flag</td>
+            </tr>
+            <tr>
+                <td><code>created_at, updated_at</code></td>
+                <td>TIMESTAMP</td>
+                <td>Auto-managed</td>
+            </tr>
+        </table>
+
+        <h3>business_profiles</h3>
+        <p>UMKM/business information. One per user (1:1 relationship).</p>
+        <table>
+            <tr>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>id</code></td>
+                <td>INT PRIMARY KEY</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>user_id</code></td>
+                <td>INT UNIQUE FK</td>
+                <td>References users (cascade delete)</td>
+            </tr>
+            <tr>
+                <td><code>business_name</code></td>
+                <td>VARCHAR(255)</td>
+                <td>Required</td>
+            </tr>
+            <tr>
+                <td><code>owner_name</code></td>
+                <td>VARCHAR(255)</td>
+                <td>Optional</td>
+            </tr>
+            <tr>
+                <td><code>address, phone</code></td>
+                <td>TEXT, VARCHAR(15)</td>
+                <td>Optional</td>
+            </tr>
+        </table>
+
+        <h3>categories</h3>
+        <p>Product categories. Per-user scoped.</p>
+        <table>
+            <tr>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>id</code></td>
+                <td>INT PRIMARY KEY</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>user_id</code></td>
+                <td>INT FK</td>
+                <td>References users (cascade delete)</td>
+            </tr>
+            <tr>
+                <td><code>name</code></td>
+                <td>VARCHAR(255)</td>
+                <td>Required</td>
+            </tr>
+            <tr>
+                <td><code>description</code></td>
+                <td>TEXT</td>
+                <td>Optional</td>
+            </tr>
+        </table>
+
+        <h3>products</h3>
+        <p>Inventory. Per-user, optional category.</p>
+        <table>
+            <tr>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>id</code></td>
+                <td>INT PRIMARY KEY</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>user_id</code></td>
+                <td>INT FK</td>
+                <td>References users</td>
+            </tr>
+            <tr>
+                <td><code>category_id</code></td>
+                <td>INT FK NULLABLE</td>
+                <td>References categories (set null)</td>
+            </tr>
+            <tr>
+                <td><code>name</code></td>
+                <td>VARCHAR(255)</td>
+                <td>Required</td>
+            </tr>
+            <tr>
+                <td><code>price</code></td>
+                <td>DECIMAL(15,2)</td>
+                <td>Required, >= 0</td>
+            </tr>
+            <tr>
+                <td><code>stock</code></td>
+                <td>INT</td>
+                <td>Informational only</td>
+            </tr>
+            <tr>
+                <td><code>unit</code></td>
+                <td>VARCHAR(50)</td>
+                <td>pcs, box, kg, etc</td>
+            </tr>
+            <tr>
+                <td><code>is_active</code></td>
+                <td>BOOLEAN</td>
+                <td>Toggle without deleting</td>
+            </tr>
+        </table>
+
+        <h3>transactions</h3>
+        <p>Sales transactions. Per-user, multiple items each.</p>
+        <table>
+            <tr>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>id</code></td>
+                <td>INT PRIMARY KEY</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>user_id</code></td>
+                <td>INT FK</td>
+                <td>References users</td>
+            </tr>
+            <tr>
+                <td><code>transaction_code</code></td>
+                <td>VARCHAR(255) UNIQUE</td>
+                <td>TRX-YYYYMMDD-XXXXX</td>
+            </tr>
+            <tr>
+                <td><code>transaction_date</code></td>
+                <td>DATE</td>
+                <td>Required</td>
+            </tr>
+            <tr>
+                <td><code>total_amount</code></td>
+                <td>DECIMAL(15,2)</td>
+                <td>Sum of subtotals</td>
+            </tr>
+            <tr>
+                <td><code>notes</code></td>
+                <td>TEXT</td>
+                <td>Optional</td>
+            </tr>
+        </table>
+
+        <h3>transaction_items</h3>
+        <p>Line items in a transaction. Stores price snapshot.</p>
+        <table>
+            <tr>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>id</code></td>
+                <td>INT PRIMARY KEY</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>transaction_id</code></td>
+                <td>INT FK</td>
+                <td>References transactions (cascade)</td>
+            </tr>
+            <tr>
+                <td><code>product_id</code></td>
+                <td>INT FK</td>
+                <td>References products (restrict)</td>
+            </tr>
+            <tr>
+                <td><code>product_name</code></td>
+                <td>VARCHAR(255)</td>
+                <td>Snapshot for history</td>
+            </tr>
+            <tr>
+                <td><code>price</code></td>
+                <td>DECIMAL(15,2)</td>
+                <td>Snapshot at time of sale</td>
+            </tr>
+            <tr>
+                <td><code>quantity</code></td>
+                <td>INT</td>
+                <td>Required, >= 1</td>
+            </tr>
+            <tr>
+                <td><code>subtotal</code></td>
+                <td>DECIMAL(15,2)</td>
+                <td>quantity × price</td>
+            </tr>
+        </table>
+
+        <h3>blog_posts</h3>
+        <p>Public blog content. Admin-only creation.</p>
+        <table>
+            <tr>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>id</code></td>
+                <td>INT PRIMARY KEY</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>title</code></td>
+                <td>VARCHAR(255)</td>
+                <td>Required</td>
+            </tr>
+            <tr>
+                <td><code>slug</code></td>
+                <td>VARCHAR(255) UNIQUE</td>
+                <td>URL-friendly</td>
+            </tr>
+            <tr>
+                <td><code>content</code></td>
+                <td>LONGTEXT</td>
+                <td>Blog body</td>
+            </tr>
+            <tr>
+                <td><code>published_at</code></td>
+                <td>TIMESTAMP NULL</td>
+                <td>NULL = draft</td>
+            </tr>
+        </table>
+
+        <h2>Relationships</h2>
+        <div class="diagram">
+User (1)
+  ├──1:1──> BusinessProfile
+  ├──1:N──> Category
+  ├──1:N──> Product
+  │          └──1:N──> TransactionItem
+  └──1:N──> Transaction
+              └──1:N──> TransactionItem
+                         └──M:N──> Product</div>
+
+        <h2>Foreign Keys</h2>
+        <table>
+            <tr>
+                <th>Table</th>
+                <th>Column</th>
+                <th>References</th>
+                <th>On Delete</th>
+            </tr>
+            <tr>
+                <td>business_profiles</td>
+                <td>user_id</td>
+                <td>users(id)</td>
+                <td>CASCADE</td>
+            </tr>
+            <tr>
+                <td>categories</td>
+                <td>user_id</td>
+                <td>users(id)</td>
+                <td>CASCADE</td>
+            </tr>
+            <tr>
+                <td>products</td>
+                <td>user_id</td>
+                <td>users(id)</td>
+                <td>CASCADE</td>
+            </tr>
+            <tr>
+                <td>products</td>
+                <td>category_id</td>
+                <td>categories(id)</td>
+                <td>SET NULL</td>
+            </tr>
+            <tr>
+                <td>transactions</td>
+                <td>user_id</td>
+                <td>users(id)</td>
+                <td>CASCADE</td>
+            </tr>
+            <tr>
+                <td>transaction_items</td>
+                <td>transaction_id</td>
+                <td>transactions(id)</td>
+                <td>CASCADE</td>
+            </tr>
+            <tr>
+                <td>transaction_items</td>
+                <td>product_id</td>
+                <td>products(id)</td>
+                <td>RESTRICT</td>
+            </tr>
+        </table>
+
+        <h2>Query Examples</h2>
+
+        <h3>Get user's total revenue</h3>
+        <pre><code>SELECT SUM(total_amount) 
+FROM transactions 
+WHERE user_id = ?;</code></pre>
+
+        <h3>Get top selling products</h3>
+        <pre><code>SELECT product_id, product_name, SUM(quantity) as qty_sold
+FROM transaction_items
+WHERE transaction_id IN (
+    SELECT id FROM transactions WHERE user_id = ?
+)
+GROUP BY product_id, product_name
+ORDER BY qty_sold DESC
+LIMIT 10;</code></pre>
+
+        <h3>Get low stock products</h3>
+        <pre><code>SELECT * FROM products 
+WHERE user_id = ? AND stock < 5 AND is_active = true;</code></pre>
+
+        <h3>Get transaction with items (eager loaded)</h3>
+        <pre><code>// Laravel Eloquent
+Transaction::with('items.product')
+    ->where('user_id', $userId)
+    ->find($id);</code></pre>
+
+        <h2>Data Types</h2>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Usage</th>
+            </tr>
+            <tr>
+                <td><code>INT</code></td>
+                <td>IDs, quantities, small numbers</td>
+            </tr>
+            <tr>
+                <td><code>INT UNSIGNED</code></td>
+                <td>Foreign keys, stock (positive only)</td>
+            </tr>
+            <tr>
+                <td><code>DECIMAL(15,2)</code></td>
+                <td>Money (price, totals, subtotals)</td>
+            </tr>
+            <tr>
+                <td><code>VARCHAR(255)</code></td>
+                <td>Short text (names, codes)</td>
+            </tr>
+            <tr>
+                <td><code>TEXT</code></td>
+                <td>Long text (descriptions, notes)</td>
+            </tr>
+            <tr>
+                <td><code>LONGTEXT</code></td>
+                <td>Very long text (blog content)</td>
+            </tr>
+            <tr>
+                <td><code>DATE</code></td>
+                <td>Date only (no time)</td>
+            </tr>
+            <tr>
+                <td><code>TIMESTAMP</code></td>
+                <td>Date + time (auto-set)</td>
+            </tr>
+            <tr>
+                <td><code>BOOLEAN</code></td>
+                <td>true/false (is_admin, is_active)</td>
+            </tr>
+        </table>
+
+        <h2>Indexing</h2>
+        <p>Auto-indexed by database:</p>
+        <ul>
+            <li>All PRIMARY KEYs</li>
+            <li>All FOREIGN KEYs</li>
+            <li>UNIQUE columns (email, transaction_code, slug)</li>
+        </ul>
+
+        <p>Additional indexes recommended:</p>
+        <pre><code>CREATE INDEX idx_products_user_id ON products(user_id);
+CREATE INDEX idx_transactions_user_id ON transactions(user_id);
+CREATE INDEX idx_transaction_items_transaction_id ON transaction_items(transaction_id);</code></pre>
+
+        <h2>Migrations</h2>
+        <p>Run in order, can rollback:</p>
+        <pre><code>2024_01_01_create_users_table.php
+2024_01_02_create_business_profiles_table.php
+2024_01_03_create_categories_table.php
+2024_01_04_create_products_table.php
+2024_01_05_create_transactions_table.php
+2024_01_06_create_transaction_items_table.php
+2026_09_24_create_cache_table.php
+2026_09_24_add_admin_and_blog.php</code></pre>
+
+        <p>Run all:</p>
+        <pre><code>php artisan migrate</code></pre>
+
+        <p>Rollback:</p>
+        <pre><code>php artisan migrate:rollback</code></pre>
+
+        <p style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 13px;">
+            See <a href="API.html">API</a> for route documentation.
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMKM Sales System - Project Overview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #0f0f1e;
+            border-radius: 12px;
+            padding: 50px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border: 1px solid rgba(100,200,255,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+            padding-bottom: 30px;
+        }
+        h1 {
+            color: #4fc3f7;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #aaa;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .school {
+            color: #4fc3f7;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #4fc3f7;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-left: 4px solid #4fc3f7;
+            padding-left: 15px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: #1a1a2e;
+            border: 2px solid #4fc3f7;
+            border-radius: 8px;
+            padding: 20px;
+            color: #e0e0e0;
+        }
+        .card-title {
+            color: #4fc3f7;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .card-content {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #aaa;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 13px;
+            color: #e0e0e0;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #51cf66;
+            font-weight: bold;
+        }
+        .checklist {
+            background: #1a1a2e;
+            border: 2px solid #4fc3f7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .checklist-title {
+            color: #4fc3f7;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #0f0f1e;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #4fc3f7;
+        }
+        .checklist-item label {
+            flex: 1;
+            cursor: pointer;
+            color: #e0e0e0;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status-complete { background: rgba(81, 207, 102, 0.2); color: #51cf66; }
+        .status-pending { background: rgba(255, 215, 0, 0.2); color: #ffd700; }
+        .status-review { background: rgba(79, 195, 247, 0.2); color: #4fc3f7; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-box {
+            background: #1a1a2e;
+            border: 1px solid #4fc3f7;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 28px;
+            color: #4fc3f7;
+            font-weight: bold;
+        }
+        .stat-label {
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .tech-item {
+            background: #1a1a2e;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+        }
+        .tech-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .tech-name {
+            color: #4fc3f7;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .tech-version {
+            color: #aaa;
+            font-size: 11px;
+        }
+        .highlight-box {
+            background: rgba(79, 195, 247, 0.1);
+            border-left: 4px solid #4fc3f7;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            color: #e0e0e0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .docs-links {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .doc-link {
+            background: #1a1a2e;
+            border: 2px solid #4fc3f7;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #4fc3f7;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .doc-link:hover {
+            background: rgba(79, 195, 247, 0.1);
+            border-color: #51cf66;
+            color: #51cf66;
+        }
+        .doc-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        @media (max-width: 1000px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .tech-stack { grid-template-columns: 1fr; }
+            .docs-links { grid-template-columns: repeat(2, 1fr); }
+        }
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(100,200,255,0.2);
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏪 UMKM Sales System</h1>
+            <p class="subtitle">Aplikasi Web Pencatatan Penjualan UMKM</p>
+            <p class="school">👥 Kelompok 4 - SMK AS-SYAFI'IYAH 01 JAKARTA</p>
+            <p class="school" style="font-size: 12px; margin-top: 5px;">Praktek Kerja Lapangan (PKL) 2026/2027</p>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Database Tables</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">11</div>
+                <div class="stat-label">Controllers</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Models</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Responsive</div>
+            </div>
+        </div>
+
+        <!-- Dokumentasi Links -->
+        <div class="section">
+            <h2 class="section-title">📚 Dokumentasi Tersedia</h2>
+            <div class="docs-links">
+                <a href="ERD.html" class="doc-link">
+                    <div class="doc-icon">🗄️</div>
+                    <div>Entity Relationship Diagram</div>
+                </a>
+                <a href="USER_FLOW.html" class="doc-link">
+                    <div class="doc-icon">👥</div>
+                    <div>User Flow Diagram</div>
+                </a>
+                <a href="DATABASE_FLOW.html" class="doc-link">
+                    <div class="doc-icon">📊</div>
+                    <div>Database Flow</div>
+                </a>
+                <a href="TECHNICAL_DOCS.md" class="doc-link">
+                    <div class="doc-icon">📖</div>
+                    <div>Technical Documentation</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Project Overview -->
+        <div class="section">
+            <h2 class="section-title">📋 Ringkasan Proyek</h2>
+            <div class="highlight-box">
+                <strong>Tujuan:</strong> Membantu pemilik UMKM mencatat dan melacak penjualan produk secara digital, termasuk manajemen inventaris, kategori produk, dan laporan penjualan real-time.<br><br>
+                <strong>Target User:</strong> Pemilik usaha kecil menengah (UMKM) yang ingin digitalisasi pencatatan penjualan tanpa system yang rumit.
+            </div>
+        </div>
+
+        <!-- Core Features -->
+        <div class="section">
+            <h2 class="section-title">✨ Fitur Utama</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🔐 Autentikasi & Keamanan</div>
+                    <ul class="feature-list">
+                        <li>User Registration & Login</li>
+                        <li>Password Hashing (Bcrypt)</li>
+                        <li>Session Management</li>
+                        <li>Admin Authorization</li>
+                        <li>Rate Limiting</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🏢 Manajemen Profil</div>
+                    <ul class="feature-list">
+                        <li>Setup Profil Bisnis</li>
+                        <li>Data Pemilik UMKM</li>
+                        <li>Kontak & Alamat</li>
+                        <li>Edit Profile</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📦 Inventaris Produk</div>
+                    <ul class="feature-list">
+                        <li>CRUD Kategori Produk</li>
+                        <li>CRUD Produk</li>
+                        <li>Manajemen Stok</li>
+                        <li>Multi-kategori Support</li>
+                        <li>Status Aktif/Nonaktif</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">💳 Transaksi & Penjualan</div>
+                    <ul class="feature-list">
+                        <li>Input Transaksi Penjualan</li>
+                        <li>Multiple Items per Transaksi</li>
+                        <li>Auto Kalkulasi Total</li>
+                        <li>Transaction Code Unik</li>
+                        <li>Catatan Transaksi</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📈 Laporan & Analisis</div>
+                    <ul class="feature-list">
+                        <li>Dashboard Ringkas</li>
+                        <li>Total Revenue</li>
+                        <li>Produk Terlaris</li>
+                        <li>Chart & Grafik</li>
+                        <li>Export CSV</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📝 Blog Publik</div>
+                    <ul class="feature-list">
+                        <li>Blog Publik untuk Tamu</li>
+                        <li>Admin Panel Blog</li>
+                        <li>Publish/Draft Posts</li>
+                        <li>SEO Friendly (Sitemap)</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="section">
+            <h2 class="section-title">🛠️ Stack Teknologi</h2>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <div class="tech-icon">🐘</div>
+                    <div class="tech-name">Laravel</div>
+                    <div class="tech-version">v11.0 (Framework)</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">💻</div>
+                    <div class="tech-name">PHP</div>
+                    <div class="tech-version">v8.2+ (Backend)</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🗄️</div>
+                    <div class="tech-name">MySQL/MariaDB</div>
+                    <div class="tech-version">Database</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🌐</div>
+                    <div class="tech-name">HTML5 + CSS3</div>
+                    <div class="tech-version">Frontend</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">JavaScript</div>
+                    <div class="tech-version">Interactivity</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📦</div>
+                    <div class="tech-name">Vite</div>
+                    <div class="tech-version">Asset Bundler</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔐</div>
+                    <div class="tech-name">Sanctum</div>
+                    <div class="tech-version">Authentication</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Blade Templates</div>
+                    <div class="tech-version">View Engine</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔧</div>
+                    <div class="tech-name">Composer + NPM</div>
+                    <div class="tech-version">Package Managers</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Schema -->
+        <div class="section">
+            <h2 class="section-title">🗄️ Database Schema</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">7 Tabel Utama</div>
+                    <ul class="feature-list">
+                        <li>users</li>
+                        <li>business_profiles</li>
+                        <li>categories</li>
+                        <li>products</li>
+                        <li>transactions</li>
+                        <li>transaction_items</li>
+                        <li>blog_posts</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Relasi Database</div>
+                    <ul class="feature-list">
+                        <li>11 Foreign Keys</li>
+                        <li>Cascade Delete</li>
+                        <li>Unique Constraints</li>
+                        <li>Proper Indexing</li>
+                        <li>Data Integrity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Routes & Endpoints -->
+        <div class="section">
+            <h2 class="section-title">🔗 API Routes</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">Public Routes</div>
+                    <ul class="feature-list">
+                        <li>GET / (Homepage)</li>
+                        <li>GET /blog (Blog Index)</li>
+                        <li>GET /blog/{slug} (Blog Detail)</li>
+                        <li>GET /login</li>
+                        <li>GET /register</li>
+                        <li>GET /sitemap.xml</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Authenticated Routes</div>
+                    <ul class="feature-list">
+                        <li>GET /dashboard</li>
+                        <li>RESOURCE /categories</li>
+                        <li>RESOURCE /products</li>
+                        <li>RESOURCE /transactions</li>
+                        <li>GET /reports</li>
+                        <li>GET /reports/export</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Checklist -->
+        <div class="section">
+            <h2 class="section-title">✅ Checklist Fitur Implementasi</h2>
+            
+            <div class="checklist">
+                <div class="checklist-title">🔐 Authentication & Authorization</div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f1" checked disabled>
+                    <label for="f1">User Registration dengan validasi email</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f2" checked disabled>
+                    <label for="f2">User Login dengan password hashing</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f3" checked disabled>
+                    <label for="f3">Session management & logout</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f4" checked disabled>
+                    <label for="f4">Admin authorization middleware</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f5" checked disabled>
+                    <label for="f5">Rate limiting pada login</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <div class="checklist-title">🏢 Business Profile Management</div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f6" checked disabled>
+                    <label for="f6">Setup profil bisnis saat pertama login</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f7" checked disabled>
+                    <label for="f7">CRUD business profile</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f8" checked disabled>
+                    <label for="f8">Menyimpan data owner, alamat, kontak</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <div class="checklist-title">📦 Inventory Management</div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f9" checked disabled>
+                    <label for="f9">CRUD Category dengan user ownership</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f10" checked disabled>
+                    <label for="f10">CRUD Product dengan stok & harga</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f11" checked disabled>
+                    <label for="f11">Product dapat aktif/nonaktif</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f12" checked disabled>
+                    <label for="f12">Multi-unit support (pcs, box, dll)</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <div class="checklist-title">💳 Transaction Management</div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f13" checked disabled>
+                    <label for="f13">Input transaksi dengan multiple items</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f14" checked disabled>
+                    <label for="f14">Auto kalkulasi subtotal & total</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f15" checked disabled>
+                    <label for="f15">Generate transaction code unik</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f16" checked disabled>
+                    <label for="f16">View transaksi dengan detail items</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f17" checked disabled>
+                    <label for="f17">Delete transaksi (cascade delete items)</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <div class="checklist-title">📈 Reports & Analytics</div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f18" checked disabled>
+                    <label for="f18">Dashboard dengan statistik ringkas</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f19" checked disabled>
+                    <label for="f19">Total revenue calculation</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f20" checked disabled>
+                    <label for="f20">Top selling products report</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f21" checked disabled>
+                    <label for="f21">Export data ke CSV</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <div class="checklist-title">📝 Blog Management</div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f22" checked disabled>
+                    <label for="f22">Public blog view dengan published posts</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f23" checked disabled>
+                    <label for="f23">Admin panel untuk manage blog</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f24" checked disabled>
+                    <label for="f24">Publish/Draft/Delete blog posts</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f25" checked disabled>
+                    <label for="f25">SEO friendly URLs & sitemap</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <div class="checklist-title">🛡️ Security & Performance</div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f26" checked disabled>
+                    <label for="f26">CSRF protection di forms</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f27" checked disabled>
+                    <label for="f27">SQL injection prevention via ORM</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f28" checked disabled>
+                    <label for="f28">User ownership validation</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f29" checked disabled>
+                    <label for="f29">Eager loading untuk optimize queries</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="f30" checked disabled>
+                    <label for="f30">Responsive design mobile-friendly</label>
+                    <span class="status-badge status-complete">DONE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deployment -->
+        <div class="section">
+            <h2 class="section-title">🚀 Setup & Deployment</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">Development</div>
+                    <ul class="feature-list">
+                        <li>Clone repository</li>
+                        <li>composer install</li>
+                        <li>npm install</li>
+                        <li>Setup .env file</li>
+                        <li>php artisan migrate</li>
+                        <li>php artisan serve</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Production</div>
+                    <ul class="feature-list">
+                        <li>Set APP_ENV=production</li>
+                        <li>Set APP_DEBUG=false</li>
+                        <li>Configure HTTPS/SSL</li>
+                        <li>Setup database backup</li>
+                        <li>Configure web server</li>
+                        <li>Monitor logs & performance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team & Timeline -->
+        <div class="section">
+            <h2 class="section-title">👥 Tim Pengembang</h2>
+            <div class="highlight-box">
+                <strong>Kelompok 4 - SMK AS-SYAFI'IYAH 01 JAKARTA</strong><br><br>
+                <strong>Anggota:</strong> [Sesuaikan dengan nama anggota tim]<br>
+                <strong>Durasi Pengerjaan:</strong> PKL 2026/2027<br>
+                <strong>Status:</strong> <span class="status-badge status-complete">COMPLETED</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>UMKM Sales System</strong> - Aplikasi Web Pencatatan Penjualan UMKM</p>
+            <p style="margin-top: 10px;">Kelompok 4 - SMK AS-SYAFI'IYAH 01 JAKARTA</p>
+            <p style="margin-top: 10px; color: #666;">Dokumentasi dibuat untuk presentasi Praktek Kerja Lapangan | November 2026</p>
+        </div>
+    </div>
+</body>
+</html>

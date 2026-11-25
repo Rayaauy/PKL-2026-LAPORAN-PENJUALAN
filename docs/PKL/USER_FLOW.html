@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Flow - UMKM Sales System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #0f0f1e;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border: 1px solid rgba(100,200,255,0.2);
+        }
+        h1 { color: #4fc3f7; margin-bottom: 10px; text-align: center; font-size: 28px; }
+        .subtitle { text-align: center; color: #aaa; margin-bottom: 40px; font-size: 14px; }
+        .flow-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        .flow-title {
+            color: #4fc3f7;
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        .flow-box {
+            background: #1a1a2e;
+            border: 2px solid #4fc3f7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .flow-box.process { border-left: 4px solid #4fc3f7; }
+        .flow-box.decision { border-left: 4px solid #ffd700; background: rgba(255, 215, 0, 0.05); }
+        .flow-box.error { border-left: 4px solid #ff6b6b; background: rgba(255, 107, 107, 0.05); }
+        .flow-box.success { border-left: 4px solid #51cf66; background: rgba(81, 207, 102, 0.05); }
+        .arrow {
+            text-align: center;
+            color: #4fc3f7;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .flow-step {
+            background: #1a1a2e;
+            border: 2px solid #4fc3f7;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        .step-number {
+            background: #4fc3f7;
+            color: #0f0f1e;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 10px;
+            font-size: 14px;
+        }
+        .step-title {
+            color: #4fc3f7;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .step-desc {
+            color: #aaa;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .legend {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(100,200,255,0.2);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            color: #aaa;
+            font-size: 13px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 3px;
+            flex-shrink: 0;
+        }
+        .primary { background: #4fc3f7; }
+        .warning { background: #ffd700; }
+        .error { background: #ff6b6b; }
+        .success { background: #51cf66; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👥 User Flow Diagram</h1>
+        <p class="subtitle">Alur Interaksi Pengguna pada Aplikasi UMKM Sales</p>
+
+        <!-- Guest Flow -->
+        <div class="flow-section">
+            <div>
+                <h2 class="flow-title">🌐 Public User Flow</h2>
+                <div class="flow-box">
+                    <strong>1. Kunjungi Homepage</strong><br>
+                    Pengguna mengakses halaman utama aplikasi
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box">
+                    <strong>2. Baca Blog</strong><br>
+                    Lihat artikel dan tips UMKM dari blog publik
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box decision">
+                    <strong>Apakah sudah login?</strong><br>
+                    ✗ Tidak → Lanjut ke Register<br>
+                    ✓ Ya → Ke Dashboard
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box">
+                    <strong>3. Login/Register</strong><br>
+                    Buat akun atau masuk ke sistem
+                </div>
+            </div>
+            <div>
+                <h2 class="flow-title">📊 Admin/Moderator Flow</h2>
+                <div class="flow-box">
+                    <strong>1. Admin Login</strong><br>
+                    Masuk dengan akun admin/moderator
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box">
+                    <strong>2. Admin Dashboard</strong><br>
+                    Kelola blog dan konten publik
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box process">
+                    <strong>Opsi Manajemen:</strong><br>
+                    • Buat artikel blog<br>
+                    • Edit/hapus postingan<br>
+                    • Publikasikan konten
+                </div>
+            </div>
+        </div>
+
+        <!-- Authenticated User Flow -->
+        <div>
+            <h2 class="flow-title">👤 Authenticated User (UMKM Owner) Flow</h2>
+            <div class="flow-grid">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Login</div>
+                    <div class="step-desc">
+                        Masuk dengan email & password.
+                        Validasi kredensial di database
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Dashboard</div>
+                    <div class="step-desc">
+                        Tampilan ringkas: total penjualan,
+                        transaksi terbaru, produk aktif
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Setup Profil Bisnis</div>
+                    <div class="step-desc">
+                        Input data UMKM: nama, pemilik,
+                        alamat, kontak (sekali saja)
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Kelola Kategori</div>
+                    <div class="step-desc">
+                        CRUD kategori produk: tambah,
+                        ubah, hapus kategori
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Kelola Produk</div>
+                    <div class="step-desc">
+                        Manajemen inventaris: harga,
+                        stok, satuan, status aktif
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">6</div>
+                    <div class="step-title">Catat Transaksi</div>
+                    <div class="step-desc">
+                        Input penjualan: pilih produk,
+                        qty, hitung subtotal otomatis
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">7</div>
+                    <div class="step-title">Lihat Laporan</div>
+                    <div class="step-desc">
+                        Analisis penjualan: grafik,
+                        total revenue, export data
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">8</div>
+                    <div class="step-title">Logout</div>
+                    <div class="step-desc">
+                        Keluar dari sistem dengan aman
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction Detailed Flow -->
+        <div class="flow-section" style="margin-top: 50px;">
+            <div>
+                <h2 class="flow-title">💳 Proses Input Transaksi Detail</h2>
+                <div class="flow-box">
+                    <strong>1. Buka Form Transaksi</strong><br>
+                    Navigasi ke halaman Transactions
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box">
+                    <strong>2. Input Data Transaksi</strong><br>
+                    • Tanggal penjualan<br>
+                    • Catatan (opsional)
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box">
+                    <strong>3. Tambah Item Penjualan</strong><br>
+                    Pilih produk → qty → harga tersimpan
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box success">
+                    <strong>4. Kalkulasi Otomatis</strong><br>
+                    Subtotal = Qty × Harga Produk
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box">
+                    <strong>5. Simpan Transaksi</strong><br>
+                    Generate transaction_code unik
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box success">
+                    <strong>✓ Transaksi Tersimpan</strong><br>
+                    Redirect ke list transaksi
+                </div>
+            </div>
+
+            <div>
+                <h2 class="flow-title">📈 Report & Export Flow</h2>
+                <div class="flow-box">
+                    <strong>1. Akses Laporan</strong><br>
+                    Menu Reports → Lihat overview
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box">
+                    <strong>2. Filter Data (Opsional)</strong><br>
+                    • Range tanggal<br>
+                    • Kategori produk
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box">
+                    <strong>3. Lihat Statistik</strong><br>
+                    • Total penjualan<br>
+                    • Produk terlaris<br>
+                    • Grafik trend
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box decision">
+                    <strong>Ingin Export?</strong><br>
+                    ✓ Ya → Download CSV<br>
+                    ✗ Tidak → Tutup
+                </div>
+                <div class="arrow">↓</div>
+                <div class="flow-box success">
+                    <strong>✓ File CSV Diunduh</strong><br>
+                    Siap analisis di Excel/Sheets
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color primary"></div>
+                <span>Proses Normal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color warning"></div>
+                <span>Keputusan/Kondisi</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color success"></div>
+                <span>Hasil Sukses</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color error"></div>
+                <span>Error/Kendala</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
